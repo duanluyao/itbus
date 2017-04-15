@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.dubby.itbus.mapper.BusMapper" >
+  <resultMap id="BaseResultMap" type="cn.dubby.itbus.bean.Bus" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="bus_line_id" property="busLineId" jdbcType="INTEGER" />
+    <result column="bus_name" property="busName" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="bus_ticket" property="busTicket" jdbcType="VARCHAR" />
+    <result column="up_count" property="upCount" jdbcType="BIGINT" />
+    <result column="down_count" property="downCount" jdbcType="BIGINT" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="cn.dubby.itbus.bean.Bus" extends="BaseResultMap" >
+    <result column="bus_content" property="busContent" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, bus_line_id, bus_name, create_time, update_time, bus_ticket, up_count, down_count
+  </sql>
+  <sql id="Blob_Column_List" >
+    bus_content
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from bus
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from bus
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="cn.dubby.itbus.bean.Bus" >
+    insert into bus (id, bus_line_id, bus_name, 
+      create_time, update_time, bus_ticket, 
+      up_count, down_count, bus_content
+      )
+    values (#{id,jdbcType=INTEGER}, #{busLineId,jdbcType=INTEGER}, #{busName,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{busTicket,jdbcType=VARCHAR}, 
+      #{upCount,jdbcType=BIGINT}, #{downCount,jdbcType=BIGINT}, #{busContent,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="cn.dubby.itbus.bean.Bus" >
+    insert into bus
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="busLineId != null" >
+        bus_line_id,
+      </if>
+      <if test="busName != null" >
+        bus_name,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="busTicket != null" >
+        bus_ticket,
+      </if>
+      <if test="upCount != null" >
+        up_count,
+      </if>
+      <if test="downCount != null" >
+        down_count,
+      </if>
+      <if test="busContent != null" >
+        bus_content,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="busLineId != null" >
+        #{busLineId,jdbcType=INTEGER},
+      </if>
+      <if test="busName != null" >
+        #{busName,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="busTicket != null" >
+        #{busTicket,jdbcType=VARCHAR},
+      </if>
+      <if test="upCount != null" >
+        #{upCount,jdbcType=BIGINT},
+      </if>
+      <if test="downCount != null" >
+        #{downCount,jdbcType=BIGINT},
+      </if>
+      <if test="busContent != null" >
+        #{busContent,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.dubby.itbus.bean.Bus" >
+    update bus
+    <set >
+      <if test="busLineId != null" >
+        bus_line_id = #{busLineId,jdbcType=INTEGER},
+      </if>
+      <if test="busName != null" >
+        bus_name = #{busName,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="busTicket != null" >
+        bus_ticket = #{busTicket,jdbcType=VARCHAR},
+      </if>
+      <if test="upCount != null" >
+        up_count = #{upCount,jdbcType=BIGINT},
+      </if>
+      <if test="downCount != null" >
+        down_count = #{downCount,jdbcType=BIGINT},
+      </if>
+      <if test="busContent != null" >
+        bus_content = #{busContent,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="cn.dubby.itbus.bean.Bus" >
+    update bus
+    set bus_line_id = #{busLineId,jdbcType=INTEGER},
+      bus_name = #{busName,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      bus_ticket = #{busTicket,jdbcType=VARCHAR},
+      up_count = #{upCount,jdbcType=BIGINT},
+      down_count = #{downCount,jdbcType=BIGINT},
+      bus_content = #{busContent,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.dubby.itbus.bean.Bus" >
+    update bus
+    set bus_line_id = #{busLineId,jdbcType=INTEGER},
+      bus_name = #{busName,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      bus_ticket = #{busTicket,jdbcType=VARCHAR},
+      up_count = #{upCount,jdbcType=BIGINT},
+      down_count = #{downCount,jdbcType=BIGINT}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

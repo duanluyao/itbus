@@ -1,0 +1,44 @@
+target/
+*.iml
+*/target/*
+*.class
+*.jar
+*.war
+*.ear
+*/*/target/
+.idea/*
+*.orig
+
+# Numerous always-ignore extensions
+*.bak
+*.diff
+*.err
+*.log
+*.rej
+*.swo
+*.swp
+*.zip
+*.vi
+*~
+*.sass-cache
+
+# OS or Editor folders
+.DS_Store
+._*
+.cache
+.project
+.tmproj
+*.esproj
+*.sublime-project
+*.sublime-workspace
+nbproject
+thumbs.db
+
+# Folders to ignore
+.hg
+.svn
+.CVS
+.idea
+
+.classpath
+.settings/
