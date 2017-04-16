@@ -2,6 +2,8 @@ package cn.dubby.itbus.mapper;
 
 import cn.dubby.itbus.bean.Bus;
 
+import java.util.List;
+
 public interface BusMapper {
     int deleteByPrimaryKey(Integer id);
 
@@ -16,4 +18,6 @@ public interface BusMapper {
     int updateByPrimaryKeyWithBLOBs(Bus record);
 
     int updateByPrimaryKey(Bus record);
+
+    List<Bus> selectTopN(int limit);
 }

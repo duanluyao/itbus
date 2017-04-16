@@ -1,1 +1,355 @@
-Hello, world.
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="favicon.ico">
+
+    <title>ITBus</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="css/offcanvas.css" rel="stylesheet">
+
+</head>
+
+<body style="position: static;">
+<nav class="navbar navbar-fixed-top navbar-inverse">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+                    aria-expanded="false" aria-controls="navbar">
+                <!--<span class="sr-only">Toggle navigation</span>-->
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">ITBus</a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="#">停靠点</a></li>
+                <li><a href="#about">总车站</a></li>
+                <li><a href="#contact">服务点</a></li>
+            </ul>
+        </div><!-- /.nav-collapse -->
+    </div><!-- /.container -->
+</nav><!-- /.navbar -->
+
+<div class="container">
+
+    <div class="row row-offcanvas row-offcanvas-right">
+
+        <div class="col-xs-12 col-sm-9">
+            <p class="pull-right visible-xs">
+                <button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas">分类</button>
+            </p>
+            <div class="jumbotron hidden">
+                <h4>Hello, developer!</h4>
+                <h6>很高兴遇见你，在这里，不需要注册，就可以直接写下你的心得、经验、感悟。</h6>
+                <h6>1、在写每篇文章时，请确保内容合法，健康，原创，并且是对他人有益的。</h6>
+                <h6>2、每个人都有行使您评价的权利，请在评价时确保公正，公平，理智。</h6>
+                <h6>3、最后，感谢您的分享，希望每个来浏览的您都能有所收获。</h6>
+            </div>
+            <div id="busList" class="row">
+
+                <!--&lt;!&ndash;第一行&ndash;&gt;-->
+                <!--<div class="col-xs-6 col-lg-6">-->
+                    <!--<h2>标题1</h2>-->
+                    <!--<p>2017-4-15-->
+                        <!--&nbsp;&nbsp;-->
+                        <!--<span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>:230-->
+                        <!--&nbsp;&nbsp;-->
+                        <!--<span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span>:90-->
+                    <!--</p>-->
+                    <!--<p><a class="btn btn-default" href="#" role="button">View details »</a></p>-->
+                <!--</div>&lt;!&ndash;/.col-xs-6.col-lg-6&ndash;&gt;-->
+                <!--<div class="col-xs-6 col-lg-6">-->
+                    <!--<h2>标题2</h2>-->
+                    <!--<p>2017-4-15-->
+                        <!--&nbsp;&nbsp;-->
+                        <!--<span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>:230-->
+                        <!--&nbsp;&nbsp;-->
+                        <!--<span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span>:90-->
+                    <!--</p>-->
+                    <!--<p><a class="btn btn-default" href="#" role="button">View details »</a></p>-->
+                <!--</div>&lt;!&ndash;/.col-xs-6.col-lg-6&ndash;&gt;-->
+
+                <!--&lt;!&ndash;第二行&ndash;&gt;-->
+                <!--<div class="col-xs-6 col-lg-6">-->
+                    <!--<h2>标题3</h2>-->
+                    <!--<p>2017-4-15-->
+                        <!--&nbsp;&nbsp;-->
+                        <!--<span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>:230-->
+                        <!--&nbsp;&nbsp;-->
+                        <!--<span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span>:90-->
+                    <!--</p>-->
+                    <!--<p><a class="btn btn-default" href="#" role="button">View details »</a></p>-->
+                <!--</div>&lt;!&ndash;/.col-xs-6.col-lg-6&ndash;&gt;-->
+                <!--<div class="col-xs-6 col-lg-6">-->
+                    <!--<h2>标题4</h2>-->
+                    <!--<p>2017-4-15-->
+                        <!--&nbsp;&nbsp;-->
+                        <!--<span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>:230-->
+                        <!--&nbsp;&nbsp;-->
+                        <!--<span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span>:90-->
+                    <!--</p>-->
+                    <!--<p><a class="btn btn-default" href="#" role="button">View details »</a></p>-->
+                <!--</div>&lt;!&ndash;/.col-xs-6.col-lg-6&ndash;&gt;-->
+
+                <!--&lt;!&ndash;第三行&ndash;&gt;-->
+                <!--<div class="col-xs-6 col-lg-6">-->
+                    <!--<h2>标题5</h2>-->
+                    <!--<p>2017-4-15-->
+                        <!--&nbsp;&nbsp;-->
+                        <!--<span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>:230-->
+                        <!--&nbsp;&nbsp;-->
+                        <!--<span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span>:90-->
+                    <!--</p>-->
+                    <!--<p><a class="btn btn-default" href="#" role="button">View details »</a></p>-->
+                <!--</div>&lt;!&ndash;/.col-xs-6.col-lg-6&ndash;&gt;-->
+                <!--<div class="col-xs-6 col-lg-6">-->
+                    <!--<h2>标题6</h2>-->
+                    <!--<p>2017-4-15-->
+                        <!--&nbsp;&nbsp;-->
+                        <!--<span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>:230-->
+                        <!--&nbsp;&nbsp;-->
+                        <!--<span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span>:90-->
+                    <!--</p>-->
+                    <!--<p><a class="btn btn-default" href="#" role="button">View details »</a></p>-->
+                <!--</div>&lt;!&ndash;/.col-xs-6.col-lg-6&ndash;&gt;-->
+
+                <!--&lt;!&ndash;第四行&ndash;&gt;-->
+                <!--<div class="col-xs-6 col-lg-6">-->
+                    <!--<h2>标题7</h2>-->
+                    <!--<p>2017-4-15-->
+                        <!--&nbsp;&nbsp;-->
+                        <!--<span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>:230-->
+                        <!--&nbsp;&nbsp;-->
+                        <!--<span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span>:90-->
+                    <!--</p>-->
+                    <!--<p><a class="btn btn-default" href="#" role="button">View details »</a></p>-->
+                <!--</div>&lt;!&ndash;/.col-xs-6.col-lg-6&ndash;&gt;-->
+                <!--<div class="col-xs-6 col-lg-6">-->
+                    <!--<h2>标题8</h2>-->
+                    <!--<p>2017-4-15-->
+                        <!--&nbsp;&nbsp;-->
+                        <!--<span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>:230-->
+                        <!--&nbsp;&nbsp;-->
+                        <!--<span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span>:90-->
+                    <!--</p>-->
+                    <!--<p><a class="btn btn-default" href="#" role="button">View details »</a></p>-->
+                <!--</div>&lt;!&ndash;/.col-xs-6.col-lg-6&ndash;&gt;-->
+
+                <!--&lt;!&ndash;第五行&ndash;&gt;-->
+                <!--<div class="col-xs-6 col-lg-6">-->
+                    <!--<h2>标题9</h2>-->
+                    <!--<p>2017-4-15-->
+                        <!--&nbsp;&nbsp;-->
+                        <!--<span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>:230-->
+                        <!--&nbsp;&nbsp;-->
+                        <!--<span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span>:90-->
+                    <!--</p>-->
+                    <!--<p><a class="btn btn-default" href="#" role="button">View details »</a></p>-->
+                <!--</div>&lt;!&ndash;/.col-xs-6.col-lg-6&ndash;&gt;-->
+                <!--<div class="col-xs-6 col-lg-6">-->
+                    <!--<h2>标题10</h2>-->
+                    <!--<p>2017-4-15-->
+                        <!--&nbsp;&nbsp;-->
+                        <!--<span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>:230-->
+                        <!--&nbsp;&nbsp;-->
+                        <!--<span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span>:90-->
+                    <!--</p>-->
+                    <!--<p><a class="btn btn-default" href="#" role="button">View details »</a></p>-->
+                <!--</div>&lt;!&ndash;/.col-xs-6.col-lg-6&ndash;&gt;-->
+
+
+            </div><!--/row-->
+        </div><!--/.col-xs-12.col-sm-9-->
+
+        <div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar">
+            <div class="text-center">
+                <h4>热门路线</h4>
+            </div>
+            <div id="topBusLineList" class="list-group">
+                <!--<a href="#" class="list-group-item active">Link</a>-->
+            </div>
+        </div><!--/.sidebar-offcanvas-->
+    </div><!--/row-->
+
+    <hr>
+
+    <footer class="text-center">
+        <p>2017-2017, ITBus.tech, All Rights Reserved | <a href="mailto:yang_zheng1994@163.com">意见反馈</a></p>
+    </footer>
+
+</div><!--/.container-->
+
+<script src="js/common.js"></script>
+
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="lib/jquery/jquery.min.js"></script>
+
+<script src="lib/bootstrap/js/bootstrap.min.js"></script>
+
+<script src="js/offcanvas.js"></script>
+
+<script src="js/index.js"></script>
+
+
+<audio controls="controls" style="display: none;"></audio>
+</body>
+<style type="text/css">#yddContainer {
+    display: block;
+    font-family: Microsoft YaHei;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    top: -4px;
+    left: -4px;
+    font-size: 12px;
+    border: 1px solid
+}
+
+#yddTop {
+    display: block;
+    height: 22px
+}
+
+#yddTopBorderlr {
+    display: block;
+    position: static;
+    height: 17px;
+    padding: 2px 28px;
+    line-height: 17px;
+    font-size: 12px;
+    color: #5079bb;
+    font-weight: bold;
+    border-style: none solid;
+    border-width: 1px
+}
+
+#yddTopBorderlr .ydd-sp {
+    position: absolute;
+    top: 2px;
+    height: 0;
+    overflow: hidden
+}
+
+.ydd-icon {
+    left: 5px;
+    width: 17px;
+    padding: 0px 0px 0px 0px;
+    padding-top: 17px;
+    background-position: -16px -44px
+}
+
+.ydd-close {
+    right: 5px;
+    width: 16px;
+    padding-top: 16px;
+    background-position: left -44px
+}
+
+#yddKeyTitle {
+    float: left;
+    text-decoration: none
+}
+
+#yddMiddle {
+    display: block;
+    margin-bottom: 10px
+}
+
+.ydd-tabs {
+    display: block;
+    margin: 5px 0;
+    padding: 0 5px;
+    height: 18px;
+    border-bottom: 1px solid
+}
+
+.ydd-tab {
+    display: block;
+    float: left;
+    height: 18px;
+    margin: 0 5px -1px 0;
+    padding: 0 4px;
+    line-height: 18px;
+    border: 1px solid;
+    border-bottom: none
+}
+
+.ydd-trans-container {
+    display: block;
+    line-height: 160%
+}
+
+.ydd-trans-container a {
+    text-decoration: none;
+}
+
+#yddBottom {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 22px;
+    line-height: 22px;
+    overflow: hidden;
+    background-position: left -22px
+}
+
+.ydd-padding010 {
+    padding: 0 10px
+}
+
+#yddWrapper {
+    color: #252525;
+    z-index: 10001;
+    background: url(chrome-extension://eopjamdnofihpioajgfdikhhbobonhbb/ab20.png);
+}
+
+#yddContainer {
+    background: #fff;
+    border-color: #4b7598
+}
+
+#yddTopBorderlr {
+    border-color: #f0f8fc
+}
+
+#yddWrapper .ydd-sp {
+    background-image: url(chrome-extension://eopjamdnofihpioajgfdikhhbobonhbb/ydd-sprite.png)
+}
+
+#yddWrapper a, #yddWrapper a:hover, #yddWrapper a:visited {
+    color: #50799b
+}
+
+#yddWrapper .ydd-tabs {
+    color: #959595
+}
+
+.ydd-tabs, .ydd-tab {
+    background: #fff;
+    border-color: #d5e7f3
+}
+
+#yddBottom {
+    color: #363636
+}
+
+#yddWrapper {
+    min-width: 250px;
+    max-width: 400px;
+}</style>
+</html>
