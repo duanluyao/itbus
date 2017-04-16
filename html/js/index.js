@@ -40,7 +40,9 @@ function freshTopBusList() {
                     + "</h2> <p>" + date.toLocaleDateString()
                     + " &nbsp;&nbsp; <span class=\"glyphicon glyphicon-thumbs-up\" aria-hidden=\"true\"></span>:"
                     + item.upCount + " &nbsp;&nbsp; <span class=\"glyphicon glyphicon-thumbs-down\" aria-hidden=\"true\"></span>:"
-                    + item.downCount + " </p> <p><a class=\"btn btn-default\" href=\"#\" role=\"button\">View details »</a></p> </div>");
+                    + item.downCount + " </p> <p><a target=\"_blank\" class=\"btn btn-default\" href=\"/detail.html?id="
+                    + item.id
+                    + "\" role=\"button\">View details »</a></p> </div>");
             });
         },
         error: function () {
