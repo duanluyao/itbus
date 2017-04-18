@@ -32,7 +32,7 @@
     delete from bus
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="cn.dubby.itbus.bean.Bus" >
+  <insert id="insert" parameterType="cn.dubby.itbus.bean.Bus" useGeneratedKeys="true" keyProperty="id">
     insert into bus (id, bus_line_id, bus_name, 
       create_time, update_time, bus_ticket, 
       up_count, down_count, bus_content
@@ -42,7 +42,7 @@
       #{upCount,jdbcType=BIGINT}, #{downCount,jdbcType=BIGINT}, #{busContent,jdbcType=LONGVARCHAR}
       )
   </insert>
-  <insert id="insertSelective" parameterType="cn.dubby.itbus.bean.Bus" >
+  <insert id="insertSelective" parameterType="cn.dubby.itbus.bean.Bus" useGeneratedKeys="true" keyProperty="id">
     insert into bus
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >

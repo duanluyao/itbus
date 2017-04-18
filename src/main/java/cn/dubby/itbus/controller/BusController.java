@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -45,6 +46,18 @@ public class BusController {
             bus = busService.detail(id);
         } catch (Exception e) {
             logger.error("detail error", e);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+        return ResponseEntity.ok(bus);
+    }
+
+    @RequestMapping(value = "save", method = RequestMethod.POST)
+    public Object save(int busLineId, String busName, String busContent) {
+        Bus bus = null;
+        try {
+            bus = busService.save(busLineId, busName, busContent);
+        } catch (Exception e) {
+            logger.error("save error", e);
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR);
         }
         return ResponseEntity.ok(bus);

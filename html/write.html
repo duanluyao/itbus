@@ -35,14 +35,14 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">ITBus</a>
+            <a class="navbar-brand" href="index.html">ITBus</a>
         </div>
         <div id="navbar" class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
-                <li><a href="#">停靠点</a></li>
+                <li><a href="index.html">停靠点</a></li>
                 <li><a href="#about">总车站</a></li>
                 <li><a href="#contact">服务点</a></li>
-                <li class="active"><a href="#contact">开车</a></li>
+                <li class="active"><a href="#">开车</a></li>
             </ul>
         </div><!-- /.nav-collapse -->
     </div><!-- /.container -->
@@ -50,46 +50,59 @@
 
 <div class="container">
 
-    <div class="row row-offcanvas row-offcanvas-right" style="width: 100%; height: 640px;">
+    <div class="row row-offcanvas row-offcanvas-right" >
 
         <form class="form-inline">
 
-            <div class="btn-group">
-                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"
-                        aria-haspopup="true" aria-expanded="false">
-                    未选定 <span class="caret"></span>
-                </button>
-                <ul class="dropdown-menu" id="busLine">
-                    <li><a href="#">Java</a></li>
-                    <li><a href="#">Redis</a></li>
-                    <li><a href="#">MySQL</a></li>
-                    <li><a href="#">Spring</a></li>
-                </ul>
+            <div class="form-group" style="width: 100%">
+                <input type="text" class="form-control" style="width: 80%"  id="busName" placeholder="标题">
+                <a id="saveBtn" class="btn btn-default" href="#" style="width: 10%" role="button">保存</a>
             </div>
 
-            <div class="form-group" style="width: 80%">
-                <input type="text" class="form-control" style="width: 100%" id="title" placeholder="标题">
+            <div class="form-group" style="width: 100%" id="busLines">
+                <!--<label class="radio-inline">-->
+                    <!--<input type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1"> Java-->
+                <!--</label>-->
+                <!--<label class="radio-inline">-->
+                    <!--<input type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2"> Redis-->
+                <!--</label>-->
+                <!--<label class="radio-inline">-->
+                    <!--<input type="radio" name="inlineRadioOptions" id="inlineRadio3" value="option3"> Spring-->
+                <!--</label>-->
             </div>
-            <!--<div class="form-group">-->
-            <!--<label for="busLine">类型</label>-->
-            <!--<input type="email" class="form-control" id="busLine" placeholder="类型">-->
-            <!--</div>-->
 
-            <button type="submit" class="btn btn-default">保存</button>
+
         </form>
-        <br/>
+    </div><!--/row-->
 
+    <div class="row row-offcanvas row-offcanvas-right"  style="width: 100%; height: 640px;">
         <div id="editormd">
             <textarea style="display:none;">[TOC]</textarea>
         </div>
-
-    </div><!--/row-->
+    </div>
 
     <hr>
 
     <footer class="text-center">
         <p>2017-2017, ITBus.tech, All Rights Reserved | <a href="mailto:yang_zheng1994@163.com">意见反馈</a></p>
     </footer>
+
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">这是修改此文章的唯一凭证，请妥善保存</h4>
+                </div>
+                <div class="modal-body">
+                    编号：<p id="id"></p>
+                    凭证：<p id="ticket"></p>
+                </div>
+                <div class="modal-footer">
+                    <button id="closeBtn" type="button" class="btn btn-default" data-dismiss="modal">我记住了</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
 
 </div><!--/.container-->
 
@@ -102,14 +115,14 @@
 
 <script src="js/offcanvas.js"></script>
 
-<script src="js/index.js"></script>
+<script src="js/write.js"></script>
 
 <script src="lib/editormd/editormd.min.js"></script>
 <script type="text/javascript">
     $(function () {
         var editor = editormd("editormd", {
             path: "lib/editormd/lib/",// Autoload modules mode, codemirror, marked... dependents libs path
-            imageUpload: true,
+            imageUpload: false,
             imageFormats: ["jpg", "jpeg", "gif", "png", "bmp", "webp"],
             imageUploadURL: "./php/upload.php",
         });

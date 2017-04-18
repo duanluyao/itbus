@@ -38,4 +38,16 @@ public class BusLineController {
         return ResponseEntity.ok(busLineList);
     }
 
+    @RequestMapping(value = "all")
+    public Object all() {
+        List<BusLine> busLineList = null;
+        try {
+            busLineList = busLineService.selectTopN(TOP_NUM);
+        } catch (Exception e) {
+            logger.error("indexList error", e);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+        return ResponseEntity.ok(busLineList);
+    }
+
 }
