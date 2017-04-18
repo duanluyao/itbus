@@ -48,13 +48,18 @@ function save(busLineId, busName, busContent) {
 function refresh() {
     freshBusLineList();
 
+    $("#closeBtn").click(function () {
+        $('#myModal').modal('hide');
+        window.location.href = "detail.html?id=" + $("#id").text();
+    });
+
     $("#saveBtn").click(function () {
         var busLineId = $('input:radio:checked').val();
         var busName = $("#busName").val();
         var busContent = $("[name='editormd-markdown-doc']").val();
 
         save(busLineId, busName, busContent);
-    })
+    });
 }
 
 
