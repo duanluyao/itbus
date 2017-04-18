@@ -76,10 +76,10 @@
 <script type="text/javascript">
     $(function () {
         var editor = editormd("editormd", {
-            path: "/lib/editormd/lib/",// Autoload modules mode, codemirror, marked... dependents libs path
+            width: "90%",
+            path: "lib/editormd/lib/",// Autoload modules mode, codemirror, marked... dependents libs path
             imageUpload: false,
-            readOnly: true,
-            styleActiveLine: false,
+            autoHeight: true,
             onload: function () {
                 this.previewing();
             }
