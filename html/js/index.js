@@ -35,14 +35,14 @@ function freshTopBusList() {
             jQuery.each(data, function (i, item) {
                 var date = new Date();
                 date.setTime(item.updateTime);
-                $("#busList").append("<div class=\"col-xs-6 col-lg-6\"> <h2>"
+                $("#busList").append("<div class=\"col-xs-6 col-lg-6\"> <h3>"
                     + item.busName
-                    + "</h2> <p>" + date.toLocaleDateString()
+                    + "</h3> <p>" + date.toLocaleDateString()
                     + " &nbsp;&nbsp; <span class=\"glyphicon glyphicon-thumbs-up\" aria-hidden=\"true\"></span>:"
                     + item.upCount + " &nbsp;&nbsp; <span class=\"glyphicon glyphicon-thumbs-down\" aria-hidden=\"true\"></span>:"
                     + item.downCount + " </p> <p><a target=\"_blank\" class=\"btn btn-default\" href=\"/detail.html?id="
                     + item.id
-                    + "\" role=\"button\">View details »</a></p> </div>");
+                    + "\" role=\"button\">阅读文章</a></p> </div>");
             });
         },
         error: function () {
