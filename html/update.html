@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="favicon.ico">
+
+    <title>ITBus</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="css/offcanvas.css" rel="stylesheet">
+
+    <!-- markdown css -->
+    <link rel="stylesheet" href="lib/editormd/css/editormd.min.css"/>
+
+</head>
+
+<body style="position: static;">
+<nav class="navbar navbar-fixed-top navbar-inverse">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+                    aria-expanded="false" aria-controls="navbar">
+                <!--<span class="sr-only">Toggle navigation</span>-->
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="index.html">ITBus</a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+                <li><a href="index.html">停靠点</a></li>
+                <li><a href="#about">总车站</a></li>
+                <li><a href="#contact">服务点</a></li>
+                <li class="active"><a href="#">开车</a></li>
+            </ul>
+        </div><!-- /.nav-collapse -->
+    </div><!-- /.container -->
+</nav><!-- /.navbar -->
+
+<div class="container">
+
+    <div class="row row-offcanvas row-offcanvas-right" >
+
+        <form class="form-inline">
+
+            <div class="form-group" style="width: 100%">
+                <input type="text" class="form-control" style="width: 80%"  id="busName" placeholder="标题">
+                <a id="saveBtn" class="btn btn-default" href="#" style="width: 10%" role="button">保存</a>
+            </div>
+
+            <div class="form-group" style="width: 100%" id="busLines">
+                <!--<label class="radio-inline">-->
+                    <!--<input type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1"> Java-->
+                <!--</label>-->
+                <!--<label class="radio-inline">-->
+                    <!--<input type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2"> Redis-->
+                <!--</label>-->
+                <!--<label class="radio-inline">-->
+                    <!--<input type="radio" name="inlineRadioOptions" id="inlineRadio3" value="option3"> Spring-->
+                <!--</label>-->
+            </div>
+
+
+        </form>
+    </div><!--/row-->
+
+    <div class="row row-offcanvas row-offcanvas-right"  style="width: 100%; height: 640px;">
+        <div id="editormd">
+            <textarea style="display:none;">[TOC]</textarea>
+        </div>
+    </div>
+
+    <hr>
+
+    <footer class="text-center">
+        <p><script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1261755694'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s95.cnzz.com/z_stat.php%3Fid%3D1261755694%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script> | 2017-2017, ITBus.tech, All Rights Reserved | <a href="mailto:yang_zheng1994@163.com">意见反馈</a></p>
+    </footer>
+
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">这是修改此文章的唯一凭证，请妥善保存</h4>
+                </div>
+                <div class="modal-body">
+                    编号：<p id="id"></p>
+                    凭证：<p id="ticket"></p>
+                </div>
+                <div class="modal-footer">
+                    <button id="closeBtn" type="button" class="btn btn-default" >我记住了</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+</div><!--/.container-->
+
+<script src="js/common.js"></script>
+
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="lib/jquery/jquery.min.js"></script>
+
+<script src="lib/bootstrap/js/bootstrap.min.js"></script>
+
+<script src="js/offcanvas.js"></script>
+
+<script src="js/update.js"></script>
+
+<script src="lib/editormd/editormd.min.js"></script>
+<script type="text/javascript">
+    $(function () {
+        var editor = editormd("editormd", {
+            path: "lib/editormd/lib/",// Autoload modules mode, codemirror, marked... dependents libs path
+            imageUpload: false,
+            imageFormats: ["jpg", "jpeg", "gif", "png", "bmp", "webp"],
+            imageUploadURL: "./php/upload.php",
+        });
+
+        /*
+         // or
+         var editor = editormd({
+         id   : "editormd",
+         path : "../lib/"
+         });
+         */
+    });
+</script>
+
+
+<audio controls="controls" style="display: none;"></audio>
+</body>
+<style type="text/css">#yddContainer {
+    display: block;
+    font-family: Microsoft YaHei;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    top: -4px;
+    left: -4px;
+    font-size: 12px;
+    border: 1px solid
+}
+
+#yddTop {
+    display: block;
+    height: 22px
+}
+
+#yddTopBorderlr {
+    display: block;
+    position: static;
+    height: 17px;
+    padding: 2px 28px;
+    line-height: 17px;
+    font-size: 12px;
+    color: #5079bb;
+    font-weight: bold;
+    border-style: none solid;
+    border-width: 1px
+}
+
+#yddTopBorderlr .ydd-sp {
+    position: absolute;
+    top: 2px;
+    height: 0;
+    overflow: hidden
+}
+
+.ydd-icon {
+    left: 5px;
+    width: 17px;
+    padding: 0px 0px 0px 0px;
+    padding-top: 17px;
+    background-position: -16px -44px
+}
+
+.ydd-close {
+    right: 5px;
+    width: 16px;
+    padding-top: 16px;
+    background-position: left -44px
+}
+
+#yddKeyTitle {
+    float: left;
+    text-decoration: none
+}
+
+#yddMiddle {
+    display: block;
+    margin-bottom: 10px
+}
+
+.ydd-tabs {
+    display: block;
+    margin: 5px 0;
+    padding: 0 5px;
+    height: 18px;
+    border-bottom: 1px solid
+}
+
+.ydd-tab {
+    display: block;
+    float: left;
+    height: 18px;
+    margin: 0 5px -1px 0;
+    padding: 0 4px;
+    line-height: 18px;
+    border: 1px solid;
+    border-bottom: none
+}
+
+.ydd-trans-container {
+    display: block;
+    line-height: 160%
+}
+
+.ydd-trans-container a {
+    text-decoration: none;
+}
+
+#yddBottom {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 22px;
+    line-height: 22px;
+    overflow: hidden;
+    background-position: left -22px
+}
+
+.ydd-padding010 {
+    padding: 0 10px
+}
+
+#yddWrapper {
+    color: #252525;
+    z-index: 10001;
+    background: url(chrome-extension://eopjamdnofihpioajgfdikhhbobonhbb/ab20.png);
+}
+
+#yddContainer {
+    background: #fff;
+    border-color: #4b7598
+}
+
+#yddTopBorderlr {
+    border-color: #f0f8fc
+}
+
+#yddWrapper .ydd-sp {
+    background-image: url(chrome-extension://eopjamdnofihpioajgfdikhhbobonhbb/ydd-sprite.png)
+}
+
+#yddWrapper a, #yddWrapper a:hover, #yddWrapper a:visited {
+    color: #50799b
+}
+
+#yddWrapper .ydd-tabs {
+    color: #959595
+}
+
+.ydd-tabs, .ydd-tab {
+    background: #fff;
+    border-color: #d5e7f3
+}
+
+#yddBottom {
+    color: #363636
+}
+
+#yddWrapper {
+    min-width: 250px;
+    max-width: 400px;
+}</style>
+</html>
