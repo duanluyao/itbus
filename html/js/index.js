@@ -35,7 +35,7 @@ function freshTopBusList() {
             jQuery.each(data, function (i, item) {
                 var date = new Date();
                 date.setTime(item.updateTime);
-                $("#busList").append("<div class=\"col-xs-6 col-lg-6\"> <h4>"
+                $("#busList").append("<div class=\"col-md-12 col-sm-12 col-xs-12 col-lg-6\"> <h4>"
                     + item.busName
                     + "</h4> <p>" + date.toLocaleDateString()
                     + " &nbsp;&nbsp; <span class=\"glyphicon glyphicon-thumbs-up\" aria-hidden=\"true\"></span>:"
