@@ -9,9 +9,13 @@
 
     <meta name="description" content="">
     <meta name="author" content="">
+
+    <!-- 百度原创 -->
+    <meta name="baidu-site-verification" content="niZ3jGZiSZ"/>
+
     <link rel="icon" href="favicon.ico">
 
-    <title id="title">ITBus</title>
+    <title>ITBus</title>
 
     <!-- Bootstrap core CSS -->
     <link href="lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -32,13 +36,13 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="index.html">ITBus</a>
+            <a class="navbar-brand" href="#">ITBus</a>
         </div>
         <div id="navbar" class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
                 <li><a href="index.html">停靠点</a></li>
                 <li><a href="#about">总车站</a></li>
-                <li><a href="home.html">服务点</a></li>
+                <li class="active"><a href="#">服务点</a></li>
                 <li><a href="write.html">开车</a></li>
             </ul>
         </div><!-- /.nav-collapse -->
@@ -47,8 +51,85 @@
 
 <div class="container">
 
-    <div class="row row-offcanvas row-offcanvas-right" style="padding: 10px">
-        <div id="test-editormd-view" class="markdown-body editormd-html-preview">
+
+    <div class="col-md-12 col-sm-12 col-xs-12 col-lg-12">
+        <div class="row">
+
+            <div class="col-md-4 col-sm-6 col-xs-12 col-lg-3">
+                <p><a class="btn btn-default" href="#" onclick="toUpdateBus()" role="button">我要修改文章</a></p>
+            </div>
+
+            <!--修改文章的弹框-->
+            <div class="modal fade" id="myModal" tabindex="-1" role="dialog">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title">请填写文章ID和Ticket</h4>
+                        </div>
+                        <div class="modal-body">
+                            编号：<input type="text" class="form-control" id="inputBusId">
+                            <!--凭证：<input type="text" class="form-control">-->
+                        </div>
+                        <div class="modal-footer">
+                            <button id="closeBtn" type="button" class="btn btn-default" >确认</button>
+                        </div>
+                    </div><!-- /.modal-content -->
+                </div><!-- /.modal-dialog -->
+            </div><!-- /.modal -->
+
+            <div class="col-md-4 col-sm-6 col-xs-12 col-lg-3">
+                <p><a class="btn btn-default" href="mailto:yang_zheng1994@163.com" role="button">我要联系作者</a></p>
+            </div>
+
+            <div class="col-md-4 col-sm-6 col-xs-12 col-lg-3">
+                <p><a class="btn btn-default" href="mailto:yang_zheng1994@163.com" role="button">我要找回Ticket</a></p>
+            </div>
+
+
+            <!--<div class="col-md-4 col-sm-6 col-xs-12 col-lg-4">-->
+                <!--<h2>标题2</h2>-->
+                <!--<p><a class="btn btn-default" href="#" role="button">处理</a></p>-->
+            <!--</div>-->
+
+            <!--<div class="col-md-4 col-sm-6 col-xs-12 col-lg-4">-->
+                <!--<h2>标题3</h2>-->
+                <!--<p><a class="btn btn-default" href="#" role="button">处理</a></p>-->
+            <!--</div>-->
+
+            <!--<div class="col-md-4 col-sm-6 col-xs-12 col-lg-4">-->
+                <!--<h2>标题4</h2>-->
+                <!--<p><a class="btn btn-default" href="#" role="button">处理</a></p>-->
+            <!--</div>-->
+
+            <!--<div class="col-md-4 col-sm-6 col-xs-12 col-lg-4">-->
+                <!--<h2>标题5</h2>-->
+                <!--<p><a class="btn btn-default" href="#" role="button">处理</a></p>-->
+            <!--</div>-->
+
+            <!--<div class="col-md-4 col-sm-6 col-xs-12 col-lg-4">-->
+                <!--<h2>标题6</h2>-->
+                <!--<p><a class="btn btn-default" href="#" role="button">处理</a></p>-->
+            <!--</div>-->
+
+            <!--<div class="col-md-4 col-sm-6 col-xs-12 col-lg-4">-->
+                <!--<h2>标题7</h2>-->
+                <!--<p><a class="btn btn-default" href="#" role="button">处理</a></p>-->
+            <!--</div>-->
+            <!--<div class="col-md-4 col-sm-6 col-xs-12 col-lg-4">-->
+                <!--<h2>标题8</h2>-->
+                <!--<p><a class="btn btn-default" href="#" role="button">处理</a></p>-->
+            <!--</div>-->
+
+            <!--<div class="col-md-4 col-sm-6 col-xs-12 col-lg-4">-->
+                <!--<h2>标题9</h2>-->
+                <!--<p><a class="btn btn-default" href="#" role="button">处理</a></p>-->
+            <!--</div>-->
+
+            <!--<div class="col-md-4 col-sm-6 col-xs-12 col-lg-4">-->
+                <!--<h2>标题10</h2>-->
+                <!--<p><a class="btn btn-default" href="#" role="button">处理</a></p>-->
+            <!--</div>-->
+
         </div>
     </div>
 
@@ -70,28 +151,10 @@
 
 <script src="lib/bootstrap/js/bootstrap.min.js"></script>
 
-<script src="js/offcanvas.js"></script>
-
-<script src="lib/editormd/lib/marked.min.js"></script>
-
-<script src="lib/editormd/lib/prettify.min.js"></script>
-
-<script src="lib/editormd/lib/raphael.min.js"></script>
-
-<script src="lib/editormd/lib/underscore.min.js"></script>
-
-<script src="lib/editormd/lib/sequence-diagram.min.js"></script>
-
-<script src="lib/editormd/lib/flowchart.min.js"></script>
-
-<script src="lib/editormd/lib/jquery.flowchart.min.js"></script>
-
-<script src="lib/editormd/editormd.min.js"></script>
-
-<script src="js/detail.js"></script>
+<script src="js/home.js"></script>
 
 <script>
-    (function(){
+    (function () {
         var bp = document.createElement('script');
         var curProtocol = window.location.protocol.split(':')[0];
         if (curProtocol === 'https') {

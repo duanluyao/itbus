@@ -20,11 +20,13 @@ function freshBusLineList() {
     });
 }
 
-function save(busLineId, busName, busContent) {
+function save(busId, ticket, busLineId, busName, busContent) {
     $.ajax({
         type: 'post',
-        url: "bus/save",
+        url: "bus/update",
         data: {
+            busId: busId,
+            ticket: ticket,
             busLineId: busLineId,
             busName: busName,
             busContent: busContent
@@ -44,9 +46,34 @@ function save(busLineId, busName, busContent) {
     });
 }
 
+//  获取文章
+function freshDetail(busId) {
+    $.ajax({
+        type: 'get',
+        url: "bus/detail",
+        data: {id: busId},
+        cache: false,
+        dataType: 'json',
+        success: function (data) {
+            $("[name='editormd-markdown-doc']").val(data.busContent);
+            $("#busName").val(data.busName);
+        },
+        error: function () {
+            return;
+        }
+    });
+}
+
 
 function refresh() {
     freshBusLineList();
+
+    var busId = getUrlParam('id');
+    if (busId == undefined || busId == null)
+        return;
+
+    freshDetail(busId);
+
 
     $("#closeBtn").click(function () {
         $('#myModal').modal('hide');
@@ -57,8 +84,29 @@ function refresh() {
         var busLineId = $('input:radio:checked').val();
         var busName = $("#busName").val();
         var busContent = $("[name='editormd-markdown-doc']").val();
+        var inputTicket = $("#inputTicket").val();
 
-        save(busLineId, busName, busContent);
+        if(busLineId == undefined || busLineId == null) {
+            alert("请选择分类");
+            return;
+        }
+
+        if(busName == undefined || busName == null || busName == "") {
+            alert("标题不能为空");
+            return;
+        }
+
+        if(busContent == undefined || busContent == null || busContent == "[TOC]") {
+            alert("内容不能为空");
+            return;
+        }
+
+        if(inputTicket == undefined || inputTicket == null || inputTicket == "") {
+            alert("Ticket不能为空");
+            return;
+        }
+
+        save(busId, inputTicket, busLineId, busName, busContent);
     });
 }
 
