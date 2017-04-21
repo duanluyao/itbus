@@ -58,6 +58,21 @@ function refresh() {
         var busName = $("#busName").val();
         var busContent = $("[name='editormd-markdown-doc']").val();
 
+        if(busLineId == undefined || busLineId == null) {
+            alert("请选择分类");
+            return;
+        }
+
+        if(busName == undefined || busName == null || busName == "") {
+            alert("标题不能为空");
+            return;
+        }
+
+        if(busContent == undefined || busContent == null || busContent == "[TOC]") {
+            alert("内容不能为空");
+            return;
+        }
+
         save(busLineId, busName, busContent);
     });
 }
