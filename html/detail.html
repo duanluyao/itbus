@@ -47,16 +47,18 @@
 
 <div class="container">
 
-    <div class="row row-offcanvas row-offcanvas-right">
-        <div id="editormd">
-            <textarea style="display:none;">[TOC]</textarea>
+    <div class="row row-offcanvas row-offcanvas-right" style="padding: 10px">
+        <div id="test-editormd-view" class="markdown-body editormd-html-preview">
         </div>
     </div>
 
     <hr>
 
     <footer class="text-center">
-        <p><script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1261755694'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s95.cnzz.com/z_stat.php%3Fid%3D1261755694%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script> | 2017-2017, ITBus.tech, All Rights Reserved | <a href="mailto:yang_zheng1994@163.com">意见反馈</a></p>
+        <p>
+            <script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+            document.write(unescape("%3Cspan id='cnzz_stat_icon_1261755694'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s95.cnzz.com/z_stat.php%3Fid%3D1261755694%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+            | 2017-2017, ITBus.tech, All Rights Reserved | <a href="mailto:yang_zheng1994@163.com">意见反馈</a></p>
     </footer>
 
 </div><!--/.container-->
@@ -70,32 +72,23 @@
 
 <script src="js/offcanvas.js"></script>
 
-<script src="js/detail.js"></script>
+<script src="lib/editormd/lib/marked.min.js"></script>
+
+<script src="lib/editormd/lib/prettify.min.js"></script>
+
+<script src="lib/editormd/lib/raphael.min.js"></script>
+
+<script src="lib/editormd/lib/underscore.min.js"></script>
+
+<script src="lib/editormd/lib/sequence-diagram.min.js"></script>
+
+<script src="lib/editormd/lib/flowchart.min.js"></script>
+
+<script src="lib/editormd/lib/jquery.flowchart.min.js"></script>
 
 <script src="lib/editormd/editormd.min.js"></script>
-<script type="text/javascript">
-    $(function () {
-        var editor = editormd("editormd", {
-            width: "90%",
-            path: "lib/editormd/lib/",// Autoload modules mode, codemirror, marked... dependents libs path
-            imageUpload: false,
-            autoHeight: true,
-            onload: function () {
-                this.previewing();
-            }
-        });
 
-//        editor.previewing();
-        /*
-         // or
-         var editor = editormd({
-         id   : "editormd",
-         path : "../lib/"
-         });
-         */
-    });
-</script>
-
+<script src="js/detail.js"></script>
 
 <audio controls="controls" style="display: none;"></audio>
 </body>
