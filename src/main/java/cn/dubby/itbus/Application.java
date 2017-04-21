@@ -15,9 +15,12 @@ import org.springframework.boot.web.servlet.ServletComponentScan;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
+import org.springframework.data.redis.connection.jedis.JedisConnectionFactory;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
+import redis.clients.jedis.JedisPoolConfig;
 
 import javax.sql.DataSource;
 import java.sql.SQLException;
@@ -38,41 +41,6 @@ public class Application {
 
     public static void main(String[] args) {
         applicationContext = SpringApplication.run(Application.class, args);
-    }
-
-    @Bean
-    @ConfigurationProperties(prefix = "spring.datasource")
-    public DataSource dataSource() {
-        DruidDataSource druidDataSource = new DruidDataSource();
-        try {
-            druidDataSource.setFilters("stat,mergeStat,counter,encoding,slf4j,wall,config");
-        } catch (SQLException e) {
-            logger.error("dataSource init error", e);
-        }
-        return druidDataSource;
-    }
-
-    @Bean
-    public SqlSessionFactory sqlSessionFactoryBean() throws Exception {
-
-        SqlSessionFactoryBean sqlSessionFactoryBean = new SqlSessionFactoryBean();
-        sqlSessionFactoryBean.setDataSource(dataSource());
-
-        PathMatchingResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
-
-        sqlSessionFactoryBean.setMapperLocations(resolver.getResources("classpath:cn/dubby/itbus/mapper/*.xml"));
-
-        return sqlSessionFactoryBean.getObject();
-    }
-
-    @Bean
-    public SqlSessionTemplate sqlSessionTemplate(SqlSessionFactory sqlSessionFactory) {
-        return new SqlSessionTemplate(sqlSessionFactory);
-    }
-
-    @Bean
-    public PlatformTransactionManager transactionManager() {
-        return new DataSourceTransactionManager(dataSource());
     }
 
 }
