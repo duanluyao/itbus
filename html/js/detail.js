@@ -15,7 +15,6 @@ function freshDetail(busId) {
             $("#title").text(data.busName);
             $("[name='editormd-markdown-doc']").text(data.busContent);
 
-            $(".editormd-preview").height(null);
         },
         error: function () {
             return;
