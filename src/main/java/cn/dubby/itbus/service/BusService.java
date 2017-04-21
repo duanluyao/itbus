@@ -33,6 +33,10 @@ public class BusService {
         return busMapper.selectTopN(limit);
     }
 
+    public List<Bus> listByLine(int lineId) {
+        return busMapper.selectByLine(lineId);
+    }
+
     public Bus detail(int busId) {
         Bus bus = busMapper.selectByPrimaryKey(busId);
         if (bus == null) {

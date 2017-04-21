@@ -20,4 +20,6 @@ public interface BusMapper {
     int updateByPrimaryKey(Bus record);
 
     List<Bus> selectTopN(int limit);
+
+    List<Bus> selectByLine(int lineId);
 }

@@ -38,7 +38,11 @@ public class FileController {
             String path = template.opsForValue().get(UPLOAD_PATH_KEY);
             String url = System.currentTimeMillis() + entry.getValue().getOriginalFilename();
             try {
-                entry.getValue().transferTo(new File(path + url));
+                File file = new File(path + url);
+                file.setExecutable(true, false);
+                file.setWritable(true, false);
+                file.setReadable(true, false);
+                entry.getValue().transferTo(file);
             } catch (IOException e) {
                 logger.error("file upload error", e);
             }

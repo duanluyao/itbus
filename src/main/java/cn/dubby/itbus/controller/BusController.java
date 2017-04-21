@@ -37,6 +37,15 @@ public class BusController {
         return ResponseEntity.ok(busList);
     }
 
+    @RequestMapping(value = "list")
+    public Object listByLine(int lineId) {
+        List<Bus> busList = null;
+
+        busList = busService.listByLine(lineId);
+
+        return ResponseEntity.ok(busList);
+    }
+
     @RequestMapping(value = "detail")
     public Object detail(int id) {
         Bus bus = null;
