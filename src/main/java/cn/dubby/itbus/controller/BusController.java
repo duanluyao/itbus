@@ -31,55 +31,43 @@ public class BusController {
     @RequestMapping(value = "index")
     public Object indexList() {
         List<Bus> busList = null;
-        try {
-            busList = busService.selectTopN(TOP_NUM);
-        } catch (Exception e) {
-            logger.error("indexList error", e);
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
+
+        busList = busService.selectTopN(TOP_NUM);
+
         return ResponseEntity.ok(busList);
     }
 
     @RequestMapping(value = "detail")
     public Object detail(int id) {
         Bus bus = null;
-        try {
-            bus = busService.detail(id);
-        } catch (Exception e) {
-            logger.error("detail error", e);
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
+
+        bus = busService.detail(id);
+
         return ResponseEntity.ok(bus);
     }
 
     @RequestMapping(value = "save", method = RequestMethod.POST)
     public Object save(int busLineId, String busName, String busContent) {
         ModifyResult<Bus> bus = null;
-        try {
-            bus = busService.save(busLineId, busName, busContent);
-        } catch (Exception e) {
-            logger.error("save error", e);
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
+
+        bus = busService.save(busLineId, busName, busContent);
+
         if (bus.isSuccess())
             return ResponseEntity.ok(bus.getResult());
 
-        return ResponseEntity.badRequest();
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("请求出错");
     }
 
     @RequestMapping(value = "update", method = RequestMethod.POST)
     public Object update(int busId, String ticket, int busLineId, String busName, String busContent) {
         ModifyResult<Bus> bus = null;
-        try {
-            bus = busService.update(busId, ticket, busLineId, busName, busContent);
-        } catch (Exception e) {
-            logger.error("save error", e);
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
+
+        bus = busService.update(busId, ticket, busLineId, busName, busContent);
+
         if (bus.isSuccess())
             return ResponseEntity.ok(bus.getResult());
 
-        return ResponseEntity.badRequest();
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("请求出错");
     }
 
 }
