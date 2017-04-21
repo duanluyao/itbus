@@ -24,7 +24,7 @@ public class BusLineController {
     @Autowired
     private BusLineService busLineService;
 
-    private static final int TOP_NUM = 20;
+    private static final int TOP_NUM = 1000;
 
     @RequestMapping(value = "index")
     public Object indexList() {

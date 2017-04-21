@@ -16,17 +16,18 @@ public class BusLineService {
     @Autowired
     private BusLineMapper busLineMapper;
 
-    private static final int MAX_LIST_NUM = 1000;
+    private static final int MAX_NUM = 1000;
+    private static final int MIN_NUM = 0;
 
     public List<BusLine> selectTopN(int limit) {
-        if (limit < 0 || limit > 20) {
-            limit = 10;
+        if (limit < MIN_NUM || limit > MAX_NUM) {
+            limit = MAX_NUM;
         }
         return busLineMapper.selectTopN(limit);
     }
 
     public List<BusLine> selectAll() {
-        return busLineMapper.selectTopN(MAX_LIST_NUM);
+        return busLineMapper.selectTopN(MAX_NUM);
     }
 
 }
