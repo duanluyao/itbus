@@ -67,8 +67,8 @@ function freshBusListByLineId(lineId) {
                 $("#busList").append("<div class=\"col-md-12 col-sm-12 col-xs-12 col-lg-6\"> <h4>"
                     + item.busName
                     + "</h4> <p>" + date.toLocaleDateString()
-                    + " &nbsp;&nbsp; <span class=\"glyphicon glyphicon-thumbs-up\" aria-hidden=\"true\"></span>:"
-                    + item.upCount + " &nbsp;&nbsp; <span class=\"glyphicon glyphicon-thumbs-down\" aria-hidden=\"true\"></span>:"
+                    + " &nbsp;&nbsp; 赞:"
+                    + item.upCount + " &nbsp;&nbsp; 踩:"
                     + item.downCount + " </p> <p><a target=\"_blank\" class=\"btn btn-default\" href=\"/detail.html?id="
                     + item.id
                     + "\" role=\"button\">阅读文章</a></p> </div>");
