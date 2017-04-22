@@ -1,7 +1,7 @@
 package cn.dubby.itbus.service;
 
 import cn.dubby.itbus.bean.BusLine;
-import cn.dubby.itbus.mapper.BusLineMapper;
+import cn.dubby.itbus.dao.BusLineDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,7 +14,7 @@ import java.util.List;
 public class BusLineService {
 
     @Autowired
-    private BusLineMapper busLineMapper;
+    private BusLineDao busLineDao;
 
     private static final int MAX_NUM = 1000;
     private static final int MIN_NUM = 0;
@@ -23,11 +23,11 @@ public class BusLineService {
         if (limit < MIN_NUM || limit > MAX_NUM) {
             limit = MAX_NUM;
         }
-        return busLineMapper.selectTopN(limit);
+        return busLineDao.selectTopN(limit);
     }
 
     public List<BusLine> selectAll() {
-        return busLineMapper.selectTopN(MAX_NUM);
+        return busLineDao.selectTopN(MAX_NUM);
     }
 
 }

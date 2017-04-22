@@ -1,7 +1,7 @@
 package cn.dubby.itbus.service;
 
 import cn.dubby.itbus.bean.Bus;
-import cn.dubby.itbus.mapper.BusMapper;
+import cn.dubby.itbus.dao.BusDao;
 import cn.dubby.itbus.service.dto.ModifyResult;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,7 +21,7 @@ public class BusService {
     private static final Logger logger = LoggerFactory.getLogger(BusService.class);
 
     @Autowired
-    private BusMapper busMapper;
+    private BusDao busDao;
 
     private static final int MAX_NUM = 100;
     private static final int MIN_NUM = 0;
@@ -30,15 +30,15 @@ public class BusService {
         if (limit < MIN_NUM || limit > MAX_NUM) {
             limit = MAX_NUM;
         }
-        return busMapper.selectTopN(limit);
+        return busDao.selectTopN(limit);
     }
 
     public List<Bus> listByLine(int lineId) {
-        return busMapper.selectByLine(lineId);
+        return busDao.selectByLine(lineId);
     }
 
     public Bus detail(int busId) {
-        Bus bus = busMapper.selectByPrimaryKey(busId);
+        Bus bus = busDao.selectByPrimaryKey(busId);
         if (bus == null) {
             logger.error("detail not exist,id:" + busId);
             return null;
@@ -60,8 +60,8 @@ public class BusService {
         bus.setBusTicket(UUID.randomUUID().toString() + "-" + UUID.randomUUID().toString());
 
         try {
-            busMapper.insertSelective(bus);
-            bus = busMapper.selectByPrimaryKey(bus.getId());
+            busDao.insertSelective(bus);
+            bus = busDao.selectByPrimaryKey(bus.getId());
         } catch (Exception e) {
             logger.error("save", e);
             return ModifyResult.SYSTEM_EXCEPTION;
@@ -75,7 +75,7 @@ public class BusService {
             return ModifyResult.PARAMS_ERROR;
         }
 
-        Bus bus = busMapper.selectByPrimaryKey(busId);
+        Bus bus = busDao.selectByPrimaryKey(busId);
         if (bus == null) {
             logger.error("update not exist,id:" + busId);
             return save(busLineId, busName, busContent);
@@ -93,9 +93,9 @@ public class BusService {
         bus.setBusLineId(busLineId);
 
         try {
-            busMapper.updateByPrimaryKeySelective(bus);
+            busDao.updateByPrimaryKeySelective(bus);
 
-            bus = busMapper.selectByPrimaryKey(busId);
+            bus = busDao.selectByPrimaryKey(busId);
         } catch (Exception e) {
             logger.error("save", e);
             return ModifyResult.SYSTEM_EXCEPTION;

@@ -4,7 +4,7 @@
 function freshTopBusLineList() {
     $.ajax({
         type: 'get',
-        url: "line/index",
+        url: "line/all",
         cache: false,
         dataType: 'json',
         success: function (data) {
