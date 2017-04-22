@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.util.StringUtils;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Created by yangzheng03 on 2017/4/23.
@@ -37,7 +38,7 @@ public class BusLineDao {
         cacheData = JSON.toJSONString(result);
 
         // 塞缓存
-        template.opsForValue().set(CacheUtils.getBusLineListCacheKey(limit), cacheData);
+        template.opsForValue().set(CacheUtils.getBusLineListCacheKey(limit), cacheData, 1, TimeUnit.HOURS);
         // 塞缓存key
         template.opsForSet().add(CacheUtils.BUS_LINE_COLLECTION_KEY, CacheUtils.getBusLineListCacheKey(limit));
 
