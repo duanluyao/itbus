@@ -23,22 +23,18 @@ public class BusLineController {
     @Autowired
     private BusLineService busLineService;
 
-    private static final int TOP_NUM = 1000;
+    private static final int TOP_NUM = 20;
 
     @RequestMapping(value = "index")
     public Object indexList() {
-        List<BusLine> busLineList = null;
-
-        busLineList = busLineService.selectTopN(TOP_NUM);
+        List<BusLine> busLineList = busLineService.selectTopN(TOP_NUM);
 
         return ResponseEntity.ok(busLineList);
     }
 
     @RequestMapping(value = "all")
     public Object all() {
-        List<BusLine> busLineList = null;
-
-        busLineList = busLineService.selectTopN(TOP_NUM);
+        List<BusLine> busLineList = busLineService.selectAll();
 
         return ResponseEntity.ok(busLineList);
     }

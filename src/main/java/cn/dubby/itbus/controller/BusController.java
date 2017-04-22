@@ -23,7 +23,7 @@ public class BusController {
 
     private final Logger logger = LoggerFactory.getLogger(BusController.class);
 
-    private static final int TOP_NUM = 100;
+    private static final int TOP_NUM = 40;
 
     @Autowired
     private BusService busService;

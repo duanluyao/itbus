@@ -9,6 +9,10 @@
 
     <meta name="description" content="">
     <meta name="author" content="">
+
+    <!-- 百度原创 -->
+    <meta name="baidu-site-verification" content="niZ3jGZiSZ"/>
+
     <link rel="icon" href="favicon.ico">
 
     <title>ITBus</title>
@@ -19,12 +23,9 @@
     <!-- Custom styles for this template -->
     <link href="css/offcanvas.css" rel="stylesheet">
 
-    <!-- markdown css -->
-    <link rel="stylesheet" href="lib/editormd/css/editormd.min.css"/>
-
 </head>
 
-<body style="position: static;">
+<body style="position: static;background-image: url('/pic/background.jpg')">
 <nav class="navbar navbar-fixed-top navbar-inverse">
     <div class="container">
         <div class="navbar-header">
@@ -35,74 +36,86 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="index.html">ITBus</a>
+            <a class="navbar-brand" href="#">ITBus</a>
         </div>
         <div id="navbar" class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
                 <li><a href="index.html">停靠点</a></li>
-                <li><a href="station.html">总车站</a></li>
+                <li class="active"><a href="#">总车站</a></li>
                 <li><a href="home.html">服务点</a></li>
-                <li class="active"><a href="#">开车</a></li>
+                <li><a href="write.html">开车</a></li>
             </ul>
         </div><!-- /.nav-collapse -->
     </div><!-- /.container -->
 </nav><!-- /.navbar -->
 
-<div class="container" >
+<div class="container-fluid">
 
-    <div class="row row-offcanvas row-offcanvas-right" >
+    <div class="text-center">
+        <h4>公开分类</h4><i>（未注册用户使用的公共分类）</i>
+    </div>
 
-        <form class="form-inline">
-
-            <div class="form-group" style="width: 100%">
-                <input type="text" class="form-control" style="width: 80%"  id="busName" placeholder="标题">
-                <a id="saveBtn" class="btn btn-default" href="#" style="width: 10%" role="button">保存</a>
-            </div>
-
-            <div class="form-group" style="width: 100%" id="busLines">
-                <!--<label class="radio-inline">-->
-                    <!--<input type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1"> Java-->
-                <!--</label>-->
-                <!--<label class="radio-inline">-->
-                    <!--<input type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2"> Redis-->
-                <!--</label>-->
-                <!--<label class="radio-inline">-->
-                    <!--<input type="radio" name="inlineRadioOptions" id="inlineRadio3" value="option3"> Spring-->
-                <!--</label>-->
-            </div>
-
-
-        </form>
-    </div><!--/row-->
-
-    <div class="row row-offcanvas row-offcanvas-right"  style="width: 100%; height: 640px;">
-        <div id="editormd">
-            <textarea style="display:none;">[TOC]</textarea>
+    <div class="container">
+        <div class="container" id="busLineList">
+            <!--<a href="#" class="list-group-item col-md-3 col-sm-6 col-xs-12 col-lg-2" style="margin: 6px">Link</a>-->
         </div>
+        <!--<nav aria-label="Page navigation" class="navbar-right">-->
+            <!--<ul class="pagination">-->
+                <!--<li>-->
+                    <!--<a href="#" aria-label="Previous">-->
+                        <!--<span aria-hidden="true">&laquo;</span>-->
+                    <!--</a>-->
+                <!--</li>-->
+                <!--<li><a href="#">1</a></li>-->
+                <!--<li><a href="#">2</a></li>-->
+                <!--<li><a href="#">3</a></li>-->
+                <!--<li><a href="#">4</a></li>-->
+                <!--<li><a href="#">5</a></li>-->
+                <!--<li>-->
+                    <!--<a href="#" aria-label="Next">-->
+                        <!--<span aria-hidden="true">&raquo;</span>-->
+                    <!--</a>-->
+                <!--</li>-->
+            <!--</ul>-->
+        <!--</nav>-->
+    </div>
+
+    <div class="text-center">
+        <h4>专栏</h4><i>（注册用户创建的专栏）</i>
+    </div>
+    <div class="container">
+        <div class="container" id="privateBusLineList">
+            <!--<a href="#" class="list-group-item col-md-3 col-sm-6 col-xs-12 col-lg-2" style="margin: 6px">Link</a>-->
+        </div>
+        <!--<nav aria-label="Page navigation" class="navbar-right">-->
+            <!--<ul class="pagination">-->
+                <!--<li>-->
+                    <!--<a href="#" aria-label="Previous">-->
+                        <!--<span aria-hidden="true">&laquo;</span>-->
+                    <!--</a>-->
+                <!--</li>-->
+                <!--<li><a href="#">1</a></li>-->
+                <!--<li><a href="#">2</a></li>-->
+                <!--<li><a href="#">3</a></li>-->
+                <!--<li><a href="#">4</a></li>-->
+                <!--<li><a href="#">5</a></li>-->
+                <!--<li>-->
+                    <!--<a href="#" aria-label="Next">-->
+                        <!--<span aria-hidden="true">&raquo;</span>-->
+                    <!--</a>-->
+                <!--</li>-->
+            <!--</ul>-->
+        <!--</nav>-->
     </div>
 
     <hr>
 
     <footer class="text-center">
-        <p><script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1261755694'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s95.cnzz.com/z_stat.php%3Fid%3D1261755694%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script> | 2017-2017, ITBus.tech, All Rights Reserved | <a href="mailto:yang_zheng1994@163.com">意见反馈</a></p>
+        <p>
+            <script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+            document.write(unescape("%3Cspan id='cnzz_stat_icon_1261755694'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s95.cnzz.com/z_stat.php%3Fid%3D1261755694%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+            | 2017-2017, ITBus.tech, All Rights Reserved | <a href="mailto:yang_zheng1994@163.com">意见反馈</a></p>
     </footer>
-
-    <div class="modal fade" id="myModal" tabindex="-1" role="dialog">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title">这是修改此文章的唯一凭证，请妥善保存</h4>
-                </div>
-                <div class="modal-body">
-                    编号：<p id="id"></p>
-                    凭证：<p id="ticket"></p>
-                </div>
-                <div class="modal-footer">
-                    <button id="closeBtn" type="button" class="btn btn-default" >我记住了</button>
-                </div>
-            </div><!-- /.modal-content -->
-        </div><!-- /.modal-dialog -->
-    </div><!-- /.modal -->
 
 </div><!--/.container-->
 
@@ -115,30 +128,10 @@
 
 <script src="js/offcanvas.js"></script>
 
-<script src="js/write.js"></script>
-
-<script src="lib/editormd/editormd.min.js"></script>
-<script type="text/javascript">
-    $(function () {
-        var editor = editormd("editormd", {
-            path: "lib/editormd/lib/",// Autoload modules mode, codemirror, marked... dependents libs path
-            imageUpload: true,
-            imageFormats: ["jpg", "jpeg", "gif", "png", "bmp", "webp"],
-            imageUploadURL: "file/upload",
-        });
-
-        /*
-         // or
-         var editor = editormd({
-         id   : "editormd",
-         path : "../lib/"
-         });
-         */
-    });
-</script>
+<script src="js/station.js"></script>
 
 <script>
-    (function(){
+    (function () {
         var bp = document.createElement('script');
         var curProtocol = window.location.protocol.split(':')[0];
         if (curProtocol === 'https') {

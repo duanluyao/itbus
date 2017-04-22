@@ -82,11 +82,17 @@ function freshBusListByLineId(lineId) {
 
 function refresh() {
     freshTopBusLineList();
-    freshTopBusList();
 
-    var url = getUrl();
-    var timestamp = getUrlParam('timestamp');
-    console.log(timestamp);
+    var id = getUrlParam('id');
+    if (id != undefined && id != null) {
+        freshBusListByLineId(id);
+    } else {
+        freshTopBusList();
+    }
+
+
+
+
 }
 
 
