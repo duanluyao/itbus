@@ -26,6 +26,8 @@ public class BusService {
     private static final int MAX_NUM = 100;
     private static final int MIN_NUM = 0;
 
+    private static final int PAGE_SIZE = 20;
+
     public List<Bus> selectTopN(int limit) {
         if (limit < MIN_NUM || limit > MAX_NUM) {
             limit = MAX_NUM;
@@ -33,8 +35,9 @@ public class BusService {
         return busDao.selectTopN(limit);
     }
 
-    public List<Bus> listByLine(int lineId) {
-        return busDao.selectByLine(lineId);
+    public List<Bus> listByLine(int lineId, int pageId) {
+        int offset = (pageId - 1) * PAGE_SIZE;
+        return busDao.selectByLine(lineId, offset, PAGE_SIZE);
     }
 
     public Bus detail(int busId) {

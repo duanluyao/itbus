@@ -21,8 +21,8 @@ public class CacheUtils {
         return BUS_PREFIX + "limit:" + limit;
     }
 
-    public static String getBusListByLineCacheKey(int lineId) {
-        return BUS_PREFIX + "lineId:" + lineId;
+    public static String getBusListByLineCacheKey(int lineId, int offset, int limit) {
+        return BUS_PREFIX + "lineId:" + lineId + ":offset:" + offset + ":limit:" + limit;
     }
 
     public static String getBusCacheKey(int busId) {

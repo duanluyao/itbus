@@ -38,10 +38,10 @@ public class BusController {
     }
 
     @RequestMapping(value = "list")
-    public Object listByLine(int lineId) {
+    public Object listByLine(int lineId, int pageId) {
         List<Bus> busList = null;
 
-        busList = busService.listByLine(lineId);
+        busList = busService.listByLine(lineId, pageId);
 
         return ResponseEntity.ok(busList);
     }

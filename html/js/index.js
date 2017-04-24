@@ -60,6 +60,7 @@ function freshBusListByLineId(lineId) {
         cache: false,
         dataType: 'json',
         success: function (data) {
+            $("#pageNavigation").removeClass("hidden");
             $("#busList").html("");
             jQuery.each(data, function (i, item) {
                 var date = new Date();

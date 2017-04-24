@@ -46,20 +46,22 @@ public class BusDao {
         return result;
     }
 
-    public List<Bus> selectByLine(int lineId) {
+    public List<Bus> selectByLine(int lineId, int offset, int limit) {
         // 先查缓存
-        String cacheData = template.opsForValue().get(CacheUtils.getBusListByLineCacheKey(lineId));
+        String cacheData = template.opsForValue().get(CacheUtils.getBusListByLineCacheKey(lineId, offset, limit));
         if (!StringUtils.isEmpty(cacheData)) {
             List<Bus> busLineList = JSON.parseArray(cacheData, Bus.class);
             return busLineList;
         }
 
         // 查库
-        List<Bus> result = busMapper.selectByLine(lineId);
+        List<Bus> result = busMapper.selectByLine(lineId, offset, limit);
         cacheData = JSON.toJSONString(result);
 
         // 塞缓存
-        template.opsForValue().set(CacheUtils.getBusListByLineCacheKey(lineId), cacheData);
+        template.opsForValue().set(CacheUtils.getBusListByLineCacheKey(lineId, offset, limit), cacheData);
+        // 塞缓存key
+        template.opsForSet().add(CacheUtils.BUS_COLLECTION_KEY, CacheUtils.getBusListByLineCacheKey(lineId, offset, limit));
 
         return result;
     }
@@ -95,8 +97,6 @@ public class BusDao {
                 }
             }
         }
-        //删 listByLineId 缓存
-        template.delete(CacheUtils.getBusListByLineCacheKey(record.getBusLineId()));
 
         return resultRow;
     }
@@ -104,15 +104,19 @@ public class BusDao {
     public int updateByPrimaryKeySelective(Bus record) {
         Bus bus = selectByPrimaryKey(record.getId());
 
-        //删 listByLineId 缓存
-        template.delete(CacheUtils.getBusListByLineCacheKey(bus.getBusLineId()));
-
         int resultRow = busMapper.updateByPrimaryKeySelective(record);
 
         //删缓存
         template.delete(CacheUtils.getBusCacheKey(record.getId()));
-        //删 listByLineId 缓存
-        template.delete(CacheUtils.getBusListByLineCacheKey(record.getBusLineId()));
+
+        Set<String> keySet = template.opsForSet().members(CacheUtils.BUS_COLLECTION_KEY);
+        if (!CollectionUtils.isEmpty(keySet)) {
+            for (String key : keySet) {
+                if (!StringUtils.isEmpty(key)) {
+                    template.delete(key);
+                }
+            }
+        }
 
         return resultRow;
     }
