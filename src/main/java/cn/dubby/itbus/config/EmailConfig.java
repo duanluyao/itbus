@@ -19,20 +19,29 @@ public class EmailConfig {
     @Autowired
     private RedisTemplate<String, String> template;
 
-    @Bean
+    @Bean(name = "username4Email")
     public String username4Email() {
-        return "";
+        return template.opsForValue().get("username4Email");
     }
 
-    @Bean
+    @Bean(name = "password4Email")
     public String password4Email() {
-        return "";
+        return template.opsForValue().get("password4Email");
     }
 
-    @Bean
-    public String emailUsername() {
-        return "";
+    @Bean(name = "mailTransportProtocol")
+    public String mailTransportProtocol() {
+        return template.opsForValue().get("mailTransportProtocol");
     }
 
+    @Bean(name = "mailSmtpHost")
+    public String mailSmtpHost() {
+        return template.opsForValue().get("mailSmtpHost");
+    }
+
+    @Bean(name = "mailSmtpPort")
+    public String mailSmtpPort() {
+        return template.opsForValue().get("mailSmtpPort");
+    }
 
 }
