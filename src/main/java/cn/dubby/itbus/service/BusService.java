@@ -88,7 +88,6 @@ public class BusService {
         return new ModifyResult<>(bus);
     }
 
-    @Async(value = "emailTaskExecutor")
     private void sendThanksEmail(String email, int busId, String ticket) {
         try {
             emailService.sendEmail(email, EmailTemplate.THANKS_WRITE_EMAIL_SUBJECT, String.format(EmailTemplate.THANKS_WRITE_EMAIL_CONTENT, busId, ticket));

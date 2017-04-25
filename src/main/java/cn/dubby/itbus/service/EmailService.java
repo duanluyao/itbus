@@ -1,5 +1,6 @@
 package cn.dubby.itbus.service;
 
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -33,6 +34,7 @@ public class EmailService {
     @Resource(name = "mailSmtpPort")
     private String mailSmtpPort;
 
+    @Async(value = "emailTaskExecutor")
     public void sendEmail(String recipient, String subject, String content) throws UnsupportedEncodingException, MessagingException {
         // 1. 创建一封邮件
         Properties props = new Properties();                // 用于连接邮件服务器的参数配置（发送邮件时才需要用到）

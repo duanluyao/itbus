@@ -20,4 +20,10 @@ import java.io.UnsupportedEncodingException;
 @SpringBootTest
 public class BaseTest {
 
+
+    @Test
+    public void test() {
+
+    }
+
 }
