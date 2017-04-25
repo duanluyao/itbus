@@ -1,16 +1,23 @@
 package cn.dubby.itbus.service;
 
 import cn.dubby.itbus.bean.Bus;
+import cn.dubby.itbus.constant.EmailTemplate;
 import cn.dubby.itbus.dao.BusDao;
 import cn.dubby.itbus.service.dto.ModifyResult;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
+import javax.annotation.Resource;
+import javax.mail.MessagingException;
+import java.io.UnsupportedEncodingException;
 import java.util.List;
 import java.util.UUID;
+import java.util.concurrent.Executor;
 
 /**
  * Created by yangzheng03 on 2017/4/15.
@@ -22,6 +29,9 @@ public class BusService {
 
     @Autowired
     private BusDao busDao;
+
+    @Autowired
+    private EmailService emailService;
 
     private static final int MAX_NUM = 100;
     private static final int MIN_NUM = 0;
@@ -51,7 +61,7 @@ public class BusService {
         return bus;
     }
 
-    public ModifyResult<Bus> save(int busLineId, String busName, String busContent) {
+    public ModifyResult<Bus> save(int busLineId, String busName, String busContent, String email) {
         if (busLineId < 0 || StringUtils.isEmpty(busContent) || StringUtils.isEmpty(busName)) {
             return ModifyResult.PARAMS_ERROR;
         }
@@ -65,12 +75,26 @@ public class BusService {
         try {
             busDao.insertSelective(bus);
             bus = busDao.selectByPrimaryKey(bus.getId());
+
+            if (!StringUtils.isEmpty(email)) {
+                sendThanksEmail(email, bus.getId(), bus.getBusTicket());
+            }
+
         } catch (Exception e) {
             logger.error("save", e);
             return ModifyResult.SYSTEM_EXCEPTION;
         }
 
         return new ModifyResult<>(bus);
+    }
+
+    @Async(value = "emailTaskExecutor")
+    private void sendThanksEmail(String email, int busId, String ticket) {
+        try {
+            emailService.sendEmail(email, EmailTemplate.THANKS_WRITE_EMAIL_SUBJECT, String.format(EmailTemplate.THANKS_WRITE_EMAIL_CONTENT, busId, ticket));
+        } catch (Exception e) {
+            logger.error("sendThanksEmail error", e);
+        }
     }
 
     public ModifyResult<Bus> update(int busId, String ticket, int busLineId, String busName, String busContent) {
@@ -81,7 +105,7 @@ public class BusService {
         Bus bus = busDao.selectByPrimaryKey(busId);
         if (bus == null) {
             logger.error("update not exist,id:" + busId);
-            return save(busLineId, busName, busContent);
+            return save(busLineId, busName, busContent, null);
         }
 
         if (!ticket.equals(bus.getBusTicket())) {

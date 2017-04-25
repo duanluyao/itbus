@@ -43,21 +43,33 @@
                 <li><a href="station.html">总车站</a></li>
                 <li><a href="home.html">服务点</a></li>
                 <li class="active"><a href="#">开车</a></li>
+                <li><a href="#" id="saveBtn" style="color: #00d95a">保存</a></li>
             </ul>
         </div><!-- /.nav-collapse -->
     </div><!-- /.container -->
 </nav><!-- /.navbar -->
 
-<div class="container" >
+<div class="container">
 
-    <div class="row row-offcanvas row-offcanvas-right" >
+    <div class="row row-offcanvas row-offcanvas-right" style="width: 100%;">
 
-        <form class="form-inline">
+        <form>
 
-            <div class="form-group" style="width: 100%">
-                <input type="text" class="form-control" style="width: 80%"  id="busName" placeholder="标题">
-                <a id="saveBtn" class="btn btn-default" href="#" style="width: 10%" role="button">保存</a>
+            <div class="form-group">
+                <!--<label for="busName">标题</label>-->
+                <input type="text" class="form-control"  id="busName" placeholder="标题">
             </div>
+
+            <div class="form-group">
+                <!--<label for="email">邮箱</label>-->
+                <input type="email" class="form-control"  id="email" placeholder="邮箱">
+            </div>
+
+            <!--<div class="form-group" style="width: 100%">-->
+                <!--<a id="saveBtn" class="btn btn-default" href="#" role="button">保存</a>-->
+            <!--</div>-->
+
+
 
             <div class="form-group" style="width: 100%" id="busLines">
                 <!--<label class="radio-inline">-->
@@ -71,6 +83,7 @@
                 <!--</label>-->
             </div>
 
+            <!--<button type="submit" class="btn btn-default" id="saveBtn">保存</button>-->
 
         </form>
     </div><!--/row-->

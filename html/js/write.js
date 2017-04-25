@@ -20,14 +20,15 @@ function freshBusLineList() {
     });
 }
 
-function save(busLineId, busName, busContent) {
+function save(busLineId, busName, busContent, email) {
     $.ajax({
         type: 'post',
         url: "bus/save",
         data: {
             busLineId: busLineId,
             busName: busName,
-            busContent: busContent
+            busContent: busContent,
+            email: email
         },
         cache: false,
         dataType: 'json',
@@ -57,6 +58,7 @@ function refresh() {
         var busLineId = $('input:radio:checked').val();
         var busName = $("#busName").val();
         var busContent = $("[name='editormd-markdown-doc']").val();
+        var email = $("#email").val();
 
         if(busLineId == undefined || busLineId == null) {
             alert("请选择分类");
@@ -73,7 +75,7 @@ function refresh() {
             return;
         }
 
-        save(busLineId, busName, busContent);
+        save(busLineId, busName, busContent, email);
     });
 }
 

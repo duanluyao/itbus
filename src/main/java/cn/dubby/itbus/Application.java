@@ -18,6 +18,7 @@ import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.data.redis.connection.jedis.JedisConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
+import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import redis.clients.jedis.JedisPoolConfig;
@@ -32,6 +33,7 @@ import java.sql.SQLException;
 @EnableTransactionManagement
 @ServletComponentScan({"cn.dubby.itbus.component.servlet", "cn.dubby.itbus.component.filter", "cn.dubby.itbus.component.listener"})
 @MapperScan("cn.dubby.itbus.mapper")
+@EnableAsync
 public class Application {
 
     private static Logger logger = LoggerFactory.getLogger(Application.class);
