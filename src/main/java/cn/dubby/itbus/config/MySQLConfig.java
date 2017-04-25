@@ -31,18 +31,6 @@ public class MySQLConfig {
     @Autowired
     private RedisTemplate<String, String> template;
 
-//    @Bean
-//    @ConfigurationProperties(prefix = "spring.datasource")
-//    public DataSource dataSource() {
-//        DruidDataSource druidDataSource = new DruidDataSource();
-//        try {
-//            druidDataSource.setFilters("stat,mergeStat,counter,encoding,slf4j,wall,config");
-//        } catch (SQLException e) {
-//            logger.error("dataSource init error", e);
-//        }
-//        return druidDataSource;
-//    }
-
     @Bean
     @ConfigurationProperties(prefix = "spring.datasource")
     public DataSource dataSource() {

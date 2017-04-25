@@ -28,7 +28,6 @@ import java.sql.SQLException;
 /**
  * Created by teeyoung on 16/12/30.
  */
-@EnableAutoConfiguration
 @SpringBootApplication
 @EnableTransactionManagement
 @ServletComponentScan({"cn.dubby.itbus.component.servlet", "cn.dubby.itbus.component.filter", "cn.dubby.itbus.component.listener"})

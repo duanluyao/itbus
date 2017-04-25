@@ -5,6 +5,8 @@ package cn.dubby.itbus.util;
  */
 public class CacheUtils {
 
+    public static final String LOGIN_USER_COLLECTION = "login_user_collection";
+
     public static final String BUS_LINE_COLLECTION_KEY = "bus_line_collection_key";
 
     public static final String BUS_COLLECTION_KEY = "bus_collection_key";
