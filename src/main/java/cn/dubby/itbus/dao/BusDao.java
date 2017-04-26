@@ -47,23 +47,7 @@ public class BusDao {
     }
 
     public List<Bus> selectByLine(int lineId, int offset, int limit) {
-        // 先查缓存
-        String cacheData = template.opsForValue().get(CacheUtils.getBusListByLineCacheKey(lineId, offset, limit));
-        if (!StringUtils.isEmpty(cacheData)) {
-            List<Bus> busLineList = JSON.parseArray(cacheData, Bus.class);
-            return busLineList;
-        }
-
-        // 查库
-        List<Bus> result = busMapper.selectByLine(lineId, offset, limit);
-        cacheData = JSON.toJSONString(result);
-
-        // 塞缓存
-        template.opsForValue().set(CacheUtils.getBusListByLineCacheKey(lineId, offset, limit), cacheData);
-        // 塞缓存key
-        template.opsForSet().add(CacheUtils.BUS_COLLECTION_KEY, CacheUtils.getBusListByLineCacheKey(lineId, offset, limit));
-
-        return result;
+        return busMapper.selectByLine(lineId, offset, limit);
     }
 
     public Bus selectByPrimaryKey(Integer id) {
@@ -102,10 +86,7 @@ public class BusDao {
     }
 
     public int updateByPrimaryKeySelective(Bus record) {
-        Bus bus = selectByPrimaryKey(record.getId());
-
         int resultRow = busMapper.updateByPrimaryKeySelective(record);
-
         //删缓存
         template.delete(CacheUtils.getBusCacheKey(record.getId()));
 

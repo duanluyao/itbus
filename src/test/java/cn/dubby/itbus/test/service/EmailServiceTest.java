@@ -2,6 +2,7 @@ package cn.dubby.itbus.test.service;
 
 import cn.dubby.itbus.service.EmailService;
 import cn.dubby.itbus.test.BaseTest;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -16,7 +17,7 @@ public class EmailServiceTest extends BaseTest {
     @Autowired
     private EmailService emailService;
 
-    @Test
+    @Ignore
     public void test() {
         try {
             // 我自己的QQ邮箱

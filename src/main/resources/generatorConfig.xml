@@ -24,9 +24,7 @@
             <property name="enableSubPackages" value="true"/>
         </javaClientGenerator>
 
-        <table schema="dispatch" tableName="bus_line" domainObjectName="BusLine" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
-            <property name="useActualColumnNames" value="false"/>
-        </table>
+
         <table schema="dispatch" tableName="bus" domainObjectName="Bus" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
             <property name="useActualColumnNames" value="false"/>
         </table>
