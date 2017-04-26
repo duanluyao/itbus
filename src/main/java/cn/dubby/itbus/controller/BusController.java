@@ -2,6 +2,7 @@ package cn.dubby.itbus.controller;
 
 import cn.dubby.itbus.bean.Bus;
 import cn.dubby.itbus.service.BusService;
+import cn.dubby.itbus.service.dto.CountDto;
 import cn.dubby.itbus.service.dto.ModifyResult;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -25,7 +26,7 @@ public class BusController {
 
     private final Logger logger = LoggerFactory.getLogger(BusController.class);
 
-    private static final int TOP_NUM = 40;
+    private static final int TOP_NUM = 20;
 
     @Autowired
     private BusService busService;
@@ -46,6 +47,12 @@ public class BusController {
         busList = busService.listByLine(lineId, pageId);
 
         return ResponseEntity.ok(busList);
+    }
+
+    @RequestMapping(value = "count")
+    public Object countByLine(int lineId, int pageId) {
+        CountDto countDto = busService.countByLine(lineId, pageId);
+        return ResponseEntity.ok(countDto);
     }
 
     @RequestMapping(value = "detail")

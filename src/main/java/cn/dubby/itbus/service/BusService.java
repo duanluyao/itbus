@@ -3,6 +3,7 @@ package cn.dubby.itbus.service;
 import cn.dubby.itbus.bean.Bus;
 import cn.dubby.itbus.constant.EmailTemplate;
 import cn.dubby.itbus.dao.BusDao;
+import cn.dubby.itbus.service.dto.CountDto;
 import cn.dubby.itbus.service.dto.ModifyResult;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,8 +16,7 @@ import org.springframework.util.StringUtils;
 import javax.annotation.Resource;
 import javax.mail.MessagingException;
 import java.io.UnsupportedEncodingException;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 import java.util.concurrent.Executor;
 
 /**
@@ -46,8 +46,51 @@ public class BusService {
     }
 
     public List<Bus> listByLine(int lineId, int pageId) {
+        if (pageId <= 1) {
+            pageId = 1;
+        }
         int offset = (pageId - 1) * PAGE_SIZE;
         return busDao.selectByLine(lineId, offset, PAGE_SIZE);
+    }
+
+    public CountDto countByLine(int lineId, int pageId) {
+        if (pageId <= 1) {
+            pageId = 1;
+        }
+        int count = busDao.countByLine(lineId);
+        int pageCount = count / PAGE_SIZE;
+        if (count % PAGE_SIZE > 0) {
+            ++pageCount;
+        }
+        if (pageId > pageCount) {
+            pageId = pageCount;
+        }
+        List<Integer> pageIdList = generateCountList(pageId, pageCount);
+
+        return new CountDto(pageId, pageIdList);
+    }
+
+    private List<Integer> generateCountList(int currentPageId, int totalCount) {
+        LinkedList<Integer> pageIdList = new LinkedList<>();
+        pageIdList.add(currentPageId);
+        for (int i = 1; i <= 7; ++i) {
+            int tempPageId = currentPageId - i;
+            if (tempPageId >= 1) {
+                pageIdList.offerFirst(tempPageId);
+                if (pageIdList.size() >= 7) {
+                    return pageIdList;
+                }
+            }
+            tempPageId = currentPageId + i;
+            if (tempPageId <= totalCount) {
+                pageIdList.offerLast(tempPageId);
+                if (pageIdList.size() >= 7) {
+                    return pageIdList;
+                }
+            }
+        }
+
+        return pageIdList;
     }
 
     public Bus detail(int busId) {

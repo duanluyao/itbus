@@ -15,7 +15,15 @@
     <include refid="Base_Column_List" />
     from bus
     WHERE bus_line_id = #{lineId,jdbcType=INTEGER}
+    ORDER BY up_count DESC
     limit #{offset}, #{limit}
+  </select>
+
+  <select id="countByLine" resultType="int">
+    select
+    count(1)
+    from bus
+    WHERE bus_line_id = #{lineId,jdbcType=INTEGER}
     ORDER BY up_count DESC
   </select>
 

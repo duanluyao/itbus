@@ -121,4 +121,8 @@ public class BusDao {
         return resultRow;
     }
 
+    public int countByLine(int lineId) {
+        return busMapper.countByLine(lineId);
+    }
+
 }

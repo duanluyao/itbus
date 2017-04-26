@@ -2,6 +2,9 @@
  * Created by teeyoung on 2017/4/15.
  */
 
+/**
+ * 查询首页推荐的分类列表
+ */
 function freshTopBusLineList() {
     $.ajax({
         type: 'get',
@@ -13,9 +16,9 @@ function freshTopBusLineList() {
                 console.log(JSON.stringify(item));
                 if (i == 0) {
                     // $("#topBusLineList").append("<a href=\"#\" class=\"list-group-item active\">" + item.lineName + "</a>");
-                    $("#topBusLineList").append("<a href='javascript:void(0)' onclick=\"javascirpt:freshBusListByLineId(" + item.id + ")\" class=\"list-group-item\">" + item.lineName + "</a>");
+                    $("#topBusLineList").append("<a href='javascript:void(0)' onclick=\"javascirpt:freshBusListByLineId(" + item.id + ", 1)\" class=\"list-group-item\">" + item.lineName + "</a>");
                 } else {
-                    $("#topBusLineList").append("<a href='javascript:void(0)' onclick=\"javascirpt:freshBusListByLineId(" + item.id + ")\" class=\"list-group-item\">" + item.lineName + "</a>");
+                    $("#topBusLineList").append("<a href='javascript:void(0)' onclick=\"javascirpt:freshBusListByLineId(" + item.id + ", 1)\" class=\"list-group-item\">" + item.lineName + "</a>");
                 }
             });
         },
@@ -25,7 +28,9 @@ function freshTopBusLineList() {
     });
 }
 
-
+/**
+ * 查询首页推荐的文章列表
+ */
 function freshTopBusList() {
     $.ajax({
         type: 'get',
@@ -52,15 +57,24 @@ function freshTopBusList() {
     });
 }
 
-function freshBusListByLineId(lineId) {
+/**
+ * 根据分类查询文章
+ * @param lineId
+ */
+function freshBusListByLineId(lineId, pageId) {
+
+    $("#pageNavigation").addClass("hidden");
+
     $.ajax({
         type: 'get',
         url: "bus/list",
-        data: {lineId: lineId},
+        data: {
+            lineId: lineId,
+            pageId: pageId
+        },
         cache: false,
         dataType: 'json',
         success: function (data) {
-            $("#pageNavigation").removeClass("hidden");
             $("#busList").html("");
             jQuery.each(data, function (i, item) {
                 var date = new Date();
@@ -79,6 +93,71 @@ function freshBusListByLineId(lineId) {
             return;
         }
     });
+
+    $.ajax({
+        type: 'get',
+        url: "bus/count",
+        data: {
+            lineId: lineId,
+            pageId: pageId
+        },
+        cache: false,
+        dataType: 'json',
+        success: function (data) {
+            var pageIdList = data.pageIdList;
+            var currentPageId = data.currentPageId;
+            $("#pageIdList").html("");
+
+            if (pageIdList.length < 7) {
+                jQuery.each(pageIdList, function (i, item) {
+                    if (item == 0) {
+
+                    } else {
+                        $("#pageIdList").append("<li><a href='#' onclick=\"javascirpt:freshBusListByLineId("
+                            + lineId + ", "
+                            + item
+                            + ")\">"
+                            + item
+                            + "</a></li>");
+                    }
+                });
+            } else {
+                jQuery.each(pageIdList, function (i, item) {
+                    if (currentPageId == item) {
+                        $("#pageIdList").append("<li class='active'><a href='#' onclick=\"javascirpt:freshBusListByLineId("
+                            + lineId + ", "
+                            + item
+                            + ")\">"
+                            + item
+                            + "</a></li>");
+                    } else if (i == 0 && currentPageId != 1) {
+                        $("#pageIdList").append("<li> <a href='#' aria-label='Previous' onclick=\"javascirpt:freshBusListByLineId("
+                            + lineId + ", "
+                            + item
+                            + ")\"> <span aria-hidden='true'>&laquo;</span> </a> </li>");
+                    } else if (i == pageIdList.length - 1 && currentPageId != item) {
+                        $("#pageIdList").append("<li> <a href='#' aria-label='Next' onclick=\"javascirpt:freshBusListByLineId("
+                            + lineId + ", "
+                            + item
+                            + ")\"> <span aria-hidden='true'>&raquo;</span> </a> </li>");
+                    } else {
+                        $("#pageIdList").append("<li><a href='#' onclick=\"javascirpt:freshBusListByLineId("
+                            + lineId + ", "
+                            + item
+                            + ")\">"
+                            + item
+                            + "</a></li>");
+                    }
+                });
+            }
+
+
+            $("#pageNavigation").removeClass("hidden");
+        },
+        error: function () {
+            return;
+        }
+    });
 }
 
 function refresh() {
@@ -86,12 +165,14 @@ function refresh() {
 
     var id = getUrlParam('id');
     if (id != undefined && id != null) {
-        freshBusListByLineId(id);
+        var pageId = getUrlParam('pageId');
+        if (pageId != undefined && pageId != null) {
+            pageId = 1;
+        }
+        freshBusListByLineId(id, pageId);
     } else {
         freshTopBusList();
     }
-
-
 
 
 }
