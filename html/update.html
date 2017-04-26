@@ -43,6 +43,7 @@
                 <li><a href="station.html">总车站</a></li>
                 <li><a href="home.html">服务点</a></li>
                 <li class="active"><a href="#">开车</a></li>
+                <li><a href="#" id="saveBtn" style="color: #00d95a">保存</a></li>
             </ul>
         </div><!-- /.nav-collapse -->
     </div><!-- /.container -->
@@ -50,30 +51,21 @@
 
 <div class="container">
 
-    <div class="row row-offcanvas row-offcanvas-right" >
+    <div class="row row-offcanvas row-offcanvas-right"  style="width: 100%;">
 
-        <form class="form-inline">
+        <form>
 
-            <div class="form-group" style="width: 100%">
-                <input type="text" class="form-control" style="width: 80%"  id="busName" placeholder="标题">
-                <a id="saveBtn" class="btn btn-default" href="#" style="width: 10%" role="button">保存</a>
+            <div class="form-group">
+                <input type="text" class="form-control"  id="busName" placeholder="标题">
+            </div>
 
+            <div class="form-group">
+                <input type="text" class="form-control"  id="inputTicket" placeholder="ticket">
             </div>
 
             <div class="form-group" style="width: 100%" id="busLines">
-                <!--<label class="radio-inline">-->
-                    <!--<input type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1"> Java-->
-                <!--</label>-->
-                <!--<label class="radio-inline">-->
-                    <!--<input type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2"> Redis-->
-                <!--</label>-->
-                <!--<label class="radio-inline">-->
-                    <!--<input type="radio" name="inlineRadioOptions" id="inlineRadio3" value="option3"> Spring-->
-                <!--</label>-->
+
             </div>
-
-            <input type="text" class="form-control" style="width: 90%"  id="inputTicket" placeholder="ticket">
-
 
         </form>
     </div><!--/row-->

@@ -1,23 +1,19 @@
 package cn.dubby.itbus.service;
 
 import cn.dubby.itbus.bean.Bus;
+import cn.dubby.itbus.bean.EmailWithBLOBs;
 import cn.dubby.itbus.constant.EmailTemplate;
 import cn.dubby.itbus.dao.BusDao;
+import cn.dubby.itbus.mapper.EmailMapper;
 import cn.dubby.itbus.service.dto.CountDto;
 import cn.dubby.itbus.service.dto.ModifyResult;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
-import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
-import javax.annotation.Resource;
-import javax.mail.MessagingException;
-import java.io.UnsupportedEncodingException;
 import java.util.*;
-import java.util.concurrent.Executor;
 
 /**
  * Created by yangzheng03 on 2017/4/15.
@@ -31,7 +27,7 @@ public class BusService {
     private BusDao busDao;
 
     @Autowired
-    private EmailService emailService;
+    private EmailMapper emailMapper;
 
     private static final int MAX_NUM = 100;
     private static final int MIN_NUM = 0;
@@ -120,7 +116,7 @@ public class BusService {
             bus = busDao.selectByPrimaryKey(bus.getId());
 
             if (!StringUtils.isEmpty(email)) {
-                sendThanksEmail(email, bus.getId(), bus.getBusTicket());
+                saveThanksEmail(email, bus.getId(), bus.getBusTicket());
             }
 
         } catch (Exception e) {
@@ -131,12 +127,14 @@ public class BusService {
         return new ModifyResult<>(bus);
     }
 
-    private void sendThanksEmail(String email, int busId, String ticket) {
-        try {
-            emailService.sendEmail(email, EmailTemplate.THANKS_WRITE_EMAIL_SUBJECT, String.format(EmailTemplate.THANKS_WRITE_EMAIL_CONTENT, busId, ticket));
-        } catch (Exception e) {
-            logger.error("sendThanksEmail error", e);
-        }
+    private void saveThanksEmail(String recipient, int busId, String ticket) {
+        EmailWithBLOBs email = new EmailWithBLOBs();
+        email.setRecipient(recipient);
+        email.setSubject(EmailTemplate.THANKS_WRITE_EMAIL_SUBJECT);
+        email.setContent(String.format(EmailTemplate.THANKS_WRITE_EMAIL_CONTENT, busId, ticket));
+        email.setStatus(1);
+
+        emailMapper.insertSelective(email);
     }
 
     public ModifyResult<Bus> update(int busId, String ticket, int busLineId, String busName, String busContent) {
