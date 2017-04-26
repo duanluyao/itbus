@@ -2,9 +2,6 @@ package cn.dubby.itbus.bean;
 
 import java.util.Date;
 
-/**
- * 文章，每个人都可以发表，获得一个ticket，凭借此ticket可以修改文章
- */
 public class Bus {
     private Integer id;
 
@@ -21,6 +18,8 @@ public class Bus {
     private Long upCount;
 
     private Long downCount;
+
+    private Integer status;
 
     private String busContent;
 
@@ -86,6 +85,14 @@ public class Bus {
 
     public void setDownCount(Long downCount) {
         this.downCount = downCount;
+    }
+
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
     }
 
     public String getBusContent() {

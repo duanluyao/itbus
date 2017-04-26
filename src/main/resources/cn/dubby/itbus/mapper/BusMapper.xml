@@ -10,12 +10,14 @@
     <result column="bus_ticket" property="busTicket" jdbcType="VARCHAR" />
     <result column="up_count" property="upCount" jdbcType="BIGINT" />
     <result column="down_count" property="downCount" jdbcType="BIGINT" />
+    <result column="status" property="status" jdbcType="INTEGER" />
   </resultMap>
   <resultMap id="ResultMapWithBLOBs" type="cn.dubby.itbus.bean.Bus" extends="BaseResultMap" >
     <result column="bus_content" property="busContent" jdbcType="LONGVARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
-    id, bus_line_id, bus_name, create_time, update_time, bus_ticket, up_count, down_count
+    id, bus_line_id, bus_name, create_time, update_time, bus_ticket, up_count, down_count, 
+    status
   </sql>
   <sql id="Blob_Column_List" >
     bus_content
@@ -32,17 +34,17 @@
     delete from bus
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="cn.dubby.itbus.bean.Bus" useGeneratedKeys="true" keyProperty="id">
+  <insert id="insert" parameterType="cn.dubby.itbus.bean.Bus"  useGeneratedKeys="true" keyProperty="id">
     insert into bus (id, bus_line_id, bus_name, 
       create_time, update_time, bus_ticket, 
-      up_count, down_count, bus_content
-      )
+      up_count, down_count, status, 
+      bus_content)
     values (#{id,jdbcType=INTEGER}, #{busLineId,jdbcType=INTEGER}, #{busName,jdbcType=VARCHAR}, 
       #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{busTicket,jdbcType=VARCHAR}, 
-      #{upCount,jdbcType=BIGINT}, #{downCount,jdbcType=BIGINT}, #{busContent,jdbcType=LONGVARCHAR}
-      )
+      #{upCount,jdbcType=BIGINT}, #{downCount,jdbcType=BIGINT}, #{status,jdbcType=INTEGER}, 
+      #{busContent,jdbcType=LONGVARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="cn.dubby.itbus.bean.Bus" useGeneratedKeys="true" keyProperty="id">
+  <insert id="insertSelective" parameterType="cn.dubby.itbus.bean.Bus"  useGeneratedKeys="true" keyProperty="id">
     insert into bus
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -68,6 +70,9 @@
       </if>
       <if test="downCount != null" >
         down_count,
+      </if>
+      <if test="status != null" >
+        status,
       </if>
       <if test="busContent != null" >
         bus_content,
@@ -98,6 +103,9 @@
       <if test="downCount != null" >
         #{downCount,jdbcType=BIGINT},
       </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
       <if test="busContent != null" >
         #{busContent,jdbcType=LONGVARCHAR},
       </if>
@@ -127,6 +135,9 @@
       <if test="downCount != null" >
         down_count = #{downCount,jdbcType=BIGINT},
       </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=INTEGER},
+      </if>
       <if test="busContent != null" >
         bus_content = #{busContent,jdbcType=LONGVARCHAR},
       </if>
@@ -142,6 +153,7 @@
       bus_ticket = #{busTicket,jdbcType=VARCHAR},
       up_count = #{upCount,jdbcType=BIGINT},
       down_count = #{downCount,jdbcType=BIGINT},
+      status = #{status,jdbcType=INTEGER},
       bus_content = #{busContent,jdbcType=LONGVARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
@@ -153,7 +165,8 @@
       update_time = #{updateTime,jdbcType=TIMESTAMP},
       bus_ticket = #{busTicket,jdbcType=VARCHAR},
       up_count = #{upCount,jdbcType=BIGINT},
-      down_count = #{downCount,jdbcType=BIGINT}
+      down_count = #{downCount,jdbcType=BIGINT},
+      status = #{status,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>
