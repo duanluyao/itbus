@@ -1,18 +1,15 @@
 package cn.dubby.itbus.dao;
 
+import cn.dubby.itbus.aspect.cache.CacheEvict;
+import cn.dubby.itbus.aspect.cache.SingleCache;
 import cn.dubby.itbus.bean.Bus;
-import cn.dubby.itbus.bean.BusLine;
 import cn.dubby.itbus.mapper.BusMapper;
-import cn.dubby.itbus.util.CacheUtils;
-import com.alibaba.fastjson.JSON;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Repository;
-import org.springframework.util.CollectionUtils;
-import org.springframework.util.StringUtils;
 
 import java.util.List;
-import java.util.Set;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Created by yangzheng03 on 2017/4/23.
@@ -26,84 +23,38 @@ public class BusDao {
     @Autowired
     private BusMapper busMapper;
 
+    @SingleCache(cacheKey = "'busTop:'.concat(#limit)", timeout = 5, unit = TimeUnit.MINUTES)
     public List<Bus> selectTopN(int limit) {
-        // 先查缓存
-        String cacheData = template.opsForValue().get(CacheUtils.getBusListCacheKey(limit));
-        if (!StringUtils.isEmpty(cacheData)) {
-            List<Bus> busLineList = JSON.parseArray(cacheData, Bus.class);
-            return busLineList;
-        }
-
-        // 查库
-        List<Bus> result = busMapper.selectTopN(limit);
-        cacheData = JSON.toJSONString(result);
-
-        // 塞缓存
-        template.opsForValue().set(CacheUtils.getBusListCacheKey(limit), cacheData);
-        // 塞缓存key
-        template.opsForSet().add(CacheUtils.BUS_COLLECTION_KEY, CacheUtils.getBusListCacheKey(limit));
-
-        return result;
+        return busMapper.selectTopN(limit);
     }
 
     public List<Bus> selectByLine(int lineId, int offset, int limit) {
         return busMapper.selectByLine(lineId, offset, limit);
     }
 
+    @SingleCache(cacheKey = "'bus:id:'.concat(#id)")
     public Bus selectByPrimaryKey(Integer id) {
-        // 先查缓存
-        String cacheData = template.opsForValue().get(CacheUtils.getBusCacheKey(id));
-        if (!StringUtils.isEmpty(cacheData)) {
-            Bus bus = JSON.parseObject(cacheData, Bus.class);
-            return bus;
-        }
-
-        // 查库
-        Bus result = busMapper.selectByPrimaryKey(id);
-        cacheData = JSON.toJSONString(result);
-
-        // 塞缓存
-        template.opsForValue().set(CacheUtils.getBusCacheKey(id), cacheData);
-
-        return result;
+        return busMapper.selectByPrimaryKey(id);
     }
 
     public int insertSelective(Bus record) {
-        //插库
-        int resultRow = busMapper.insertSelective(record);
-
-        //删 Top N 缓存
-        Set<String> keySet = template.opsForSet().members(CacheUtils.BUS_COLLECTION_KEY);
-        if (!CollectionUtils.isEmpty(keySet)) {
-            for (String key : keySet) {
-                if (!StringUtils.isEmpty(key)) {
-                    template.delete(key);
-                }
-            }
-        }
-
-        return resultRow;
+        return busMapper.insertSelective(record);
     }
 
+    @CacheEvict(cacheKey = "'bus:id:'.concat(#record.id)")
     public int updateByPrimaryKeySelective(Bus record) {
-        int resultRow = busMapper.updateByPrimaryKeySelective(record);
-        //删缓存
-        template.delete(CacheUtils.getBusCacheKey(record.getId()));
-
-        Set<String> keySet = template.opsForSet().members(CacheUtils.BUS_COLLECTION_KEY);
-        if (!CollectionUtils.isEmpty(keySet)) {
-            for (String key : keySet) {
-                if (!StringUtils.isEmpty(key)) {
-                    template.delete(key);
-                }
-            }
-        }
-
-        return resultRow;
+        return busMapper.updateByPrimaryKeySelective(record);
     }
 
     public int countByLine(int lineId) {
         return busMapper.countByLine(lineId);
     }
 
+    public void up(int busId) {
+
+    }
+
+    public void down(int busId) {
+
+    }
 }

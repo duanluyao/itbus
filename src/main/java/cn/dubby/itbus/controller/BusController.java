@@ -88,4 +88,16 @@ public class BusController {
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("请求出错");
     }
 
+    @RequestMapping(value = "up", method = RequestMethod.POST)
+    public Object up(Integer busId) {
+        busService.up(busId);
+        return ResponseEntity.ok();
+    }
+
+    @RequestMapping(value = "down", method = RequestMethod.POST)
+    public Object down(Integer busId) {
+        busService.down(busId);
+        return ResponseEntity.ok();
+    }
+
 }

@@ -22,11 +22,7 @@ public class RedisTest extends BaseTest {
 
     @Test
     public void testHash() {
-        String visitId = UUID.randomUUID().toString();
-        Long result = template.opsForHash().increment(CacheUtils.LOGIN_USER_COLLECTION, visitId, 1L);
-        System.out.println(result);
 
-        template.opsForZSet().incrementScore("TEST_ZSET", visitId, 1);
 
 
     }

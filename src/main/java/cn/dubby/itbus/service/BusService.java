@@ -171,4 +171,11 @@ public class BusService {
         return new ModifyResult<>(bus);
     }
 
+    public void up(int busId) {
+        busDao.up(busId);
+    }
+
+    public void down(int busId) {
+        busDao.down(busId);
+    }
 }

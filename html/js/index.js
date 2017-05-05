@@ -166,10 +166,10 @@ function refresh() {
     var id = getUrlParam('id');
     if (id != undefined && id != null) {
         var pageId = getUrlParam('pageId');
-        if (pageId != undefined && pageId != null) {
+        if (pageId == undefined || pageId == null) {
             pageId = 1;
         }
-        freshBusListByLineId(id, pageId);
+        freshBusListByLineId(parseInt(id), pageId);
     } else {
         freshTopBusList();
     }
