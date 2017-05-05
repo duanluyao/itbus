@@ -13,6 +13,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
+import javax.mail.MessagingException;
+import java.io.UnsupportedEncodingException;
 import java.util.*;
 
 /**
@@ -28,6 +30,9 @@ public class BusService {
 
     @Autowired
     private EmailMapper emailMapper;
+
+    @Autowired
+    private EmailService emailService;
 
     private static final int MAX_NUM = 100;
     private static final int MIN_NUM = 0;
@@ -135,6 +140,12 @@ public class BusService {
         email.setStatus(1);
 
         emailMapper.insertSelective(email);
+
+        try {
+            emailService.sendEmail(email.getRecipient(), email.getSubject(), email.getContent());
+        } catch (Exception e) {
+            logger.error("send email error", e);
+        }
     }
 
     public ModifyResult<Bus> update(int busId, String ticket, int busLineId, String busName, String busContent) {
