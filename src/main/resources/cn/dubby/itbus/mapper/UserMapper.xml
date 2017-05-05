@@ -29,7 +29,7 @@
     delete from user
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="cn.dubby.itbus.bean.User" >
+  <insert id="insert" parameterType="cn.dubby.itbus.bean.User"   useGeneratedKeys="true" keyProperty="id">
     insert into user (id, login_name, nick_name, 
       password, email, mobile_phone, 
       status, level, create_time, 
@@ -41,7 +41,7 @@
       #{updateTime,jdbcType=TIMESTAMP}, #{invitationCode,jdbcType=VARCHAR}, #{invitationRemainCount,jdbcType=INTEGER}
       )
   </insert>
-  <insert id="insertSelective" parameterType="cn.dubby.itbus.bean.User" >
+  <insert id="insertSelective" parameterType="cn.dubby.itbus.bean.User"   useGeneratedKeys="true" keyProperty="id">
     insert into user
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >

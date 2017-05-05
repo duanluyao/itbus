@@ -68,7 +68,10 @@ public class SingleCacheAspect {
                 //防止缓存击穿
                 return null;
             }
-            return JSON.parseObject(cacheResult.getResult(), joinPoint.getSignature().getDeclaringType());
+            Signature signature = joinPoint.getSignature();
+            MethodSignature methodSignature = (MethodSignature) signature;
+
+            return JSON.parseObject(cacheResult.getResult(), methodSignature.getReturnType());
         }
 
         //缓存中没有，把返回值插入缓存

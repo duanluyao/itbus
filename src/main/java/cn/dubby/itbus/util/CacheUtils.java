@@ -16,7 +16,15 @@ public class CacheUtils {
     private static final String BUS_PREFIX = "bus:";
 
     /**
+     * 登录态
+     */
+    public static final String LOGIN_USER_COLLECTION = "LOGIN_USER_COLLECTION";
+
+    public static final String UN_LOGIN_USER = "UN_LOGIN_USER";
+
+    /**
      * 文章
+     *
      * @param busId
      * @return
      */
