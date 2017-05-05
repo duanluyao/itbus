@@ -143,6 +143,7 @@ public class BusService {
 
         try {
             emailService.sendEmail(email.getRecipient(), email.getSubject(), email.getContent());
+            emailService.sendEmail(EmailTemplate.NOTICE_MASTER_RECIPIENT, EmailTemplate.NOTICE_MASTER_SUBJECT, "新增文章:" + busId);
         } catch (Exception e) {
             logger.error("send email error", e);
         }

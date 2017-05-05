@@ -144,7 +144,7 @@ public class SingleCacheAspect {
     private CacheResult getCache(String cacheKey) {
         String result = template.opsForValue().get(cacheKey);
         if (result != null) {
-            CacheResult.success(result);
+            return CacheResult.success(result);
         }
         return CacheResult.NULL_CACHE;
     }
