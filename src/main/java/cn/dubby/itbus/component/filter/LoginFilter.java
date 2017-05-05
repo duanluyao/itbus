@@ -43,6 +43,7 @@ public class LoginFilter implements Filter {
         HttpServletResponse httpServletResponse = (HttpServletResponse) response;
 
         if (isNewGuest(httpServletRequest)) {
+            deleteCookie(httpServletResponse);
             addCookie(httpServletResponse);
             String userAgent = httpServletRequest.getHeader("User-Agent");
             if (StringUtils.isEmpty(userAgent) || userAgent.length() < 10) {
@@ -106,10 +107,19 @@ public class LoginFilter implements Filter {
         cookie.setPath("/");
         cookie.setHttpOnly(true);
         response.addCookie(cookie);
+
+        Cookie loginEmail = new Cookie(CookieConstant.LOGIN_EMAIL, "");
+        loginEmail.setMaxAge(-1);
+        loginEmail.setPath("/");
+        loginEmail.setHttpOnly(false);
+        response.addCookie(loginEmail);
     }
 
     private boolean isNewGuest(HttpServletRequest request) {
         if (StringUtils.isEmpty(CookieUtils.getCookie(request, CookieConstant.VISIT_ID))) {
+            return true;
+        }
+        if (StringUtils.isEmpty(CookieUtils.getCookie(request, CookieConstant.LOGIN_EMAIL))) {
             return true;
         }
         return false;
