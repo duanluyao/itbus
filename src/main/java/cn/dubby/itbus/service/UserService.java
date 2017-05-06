@@ -52,9 +52,10 @@ public class UserService {
             String visitId = CookieUtils.getCookie(httpServletRequest, CookieConstant.VISIT_ID);
             user.setPassword(null);
             template.opsForHash().put(CacheUtils.LOGIN_USER_COLLECTION, visitId, JSON.toJSONString(user));
+            return user;
         }
 
-        return user;
+        return null;
     }
 
     public RegisterDto register(String email, String password, String invitationCode) {
