@@ -43,7 +43,7 @@ public class LoginFilter implements Filter {
         HttpServletResponse httpServletResponse = (HttpServletResponse) response;
 
         if (isNewGuest(httpServletRequest)) {
-            deleteCookie(httpServletResponse);
+            deleteEmailCookie(httpServletResponse);
             addCookie(httpServletResponse);
             String userAgent = httpServletRequest.getHeader("User-Agent");
             if (StringUtils.isEmpty(userAgent) || userAgent.length() < 10) {
@@ -52,8 +52,8 @@ public class LoginFilter implements Filter {
             }
         } else {
             String visitId = CookieUtils.getCookie(httpServletRequest, CookieConstant.VISIT_ID);
-            if (!checkVisitId(visitId, httpServletRequest)) {
-                httpServletResponse.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+            if (checkVisitId(visitId, httpServletRequest, httpServletResponse)) {
+                chain.doFilter(request, response);
                 return;
             } else {
                 deleteCookie(httpServletResponse);
@@ -70,7 +70,7 @@ public class LoginFilter implements Filter {
     }
 
 
-    private boolean checkVisitId(String visitId, HttpServletRequest httpServletRequest) {
+    private boolean checkVisitId(String visitId, HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) {
         Object result = template.opsForHash().get(CacheUtils.LOGIN_USER_COLLECTION, visitId);
         if (result != null) {
             if (CacheUtils.UN_LOGIN_USER.equals(result)) {
@@ -78,6 +78,12 @@ public class LoginFilter implements Filter {
             }
             User user = JSON.parseObject(result.toString(), User.class);
             httpServletRequest.setAttribute(HttpRequestConstant.LOGIN_USER, user);
+
+            Cookie cookie = new Cookie(CookieConstant.LOGIN_EMAIL, user.getEmail());
+            cookie.setMaxAge(-1);
+            cookie.setPath("/");
+            cookie.setHttpOnly(false);
+            httpServletResponse.addCookie(cookie);
             return true;
         }
         return true;
@@ -93,7 +99,7 @@ public class LoginFilter implements Filter {
     private void addCookie(HttpServletResponse response) {
         String visitId = UUID.randomUUID().toString();
         Cookie cookie = new Cookie(CookieConstant.VISIT_ID, visitId);
-        cookie.setMaxAge(60 * 60 * 24 * 10);
+        cookie.setMaxAge(60 * 60 * 24 * 365);
         cookie.setPath("/");
         cookie.setHttpOnly(true);
         response.addCookie(cookie);
@@ -103,13 +109,17 @@ public class LoginFilter implements Filter {
     private void deleteCookie(HttpServletResponse response) {
         String visitId = UUID.randomUUID().toString();
         Cookie cookie = new Cookie(CookieConstant.VISIT_ID, visitId);
-        cookie.setMaxAge(-1);
+        cookie.setMaxAge(0);
         cookie.setPath("/");
         cookie.setHttpOnly(true);
         response.addCookie(cookie);
 
+        deleteEmailCookie(response);
+    }
+
+    private void deleteEmailCookie(HttpServletResponse response) {
         Cookie loginEmail = new Cookie(CookieConstant.LOGIN_EMAIL, "");
-        loginEmail.setMaxAge(-1);
+        loginEmail.setMaxAge(0);
         loginEmail.setPath("/");
         loginEmail.setHttpOnly(false);
         response.addCookie(loginEmail);
@@ -119,9 +129,7 @@ public class LoginFilter implements Filter {
         if (StringUtils.isEmpty(CookieUtils.getCookie(request, CookieConstant.VISIT_ID))) {
             return true;
         }
-        if (StringUtils.isEmpty(CookieUtils.getCookie(request, CookieConstant.LOGIN_EMAIL))) {
-            return true;
-        }
+
         return false;
     }
 

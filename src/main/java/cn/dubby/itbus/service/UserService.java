@@ -3,6 +3,7 @@ package cn.dubby.itbus.service;
 import cn.dubby.itbus.bean.User;
 import cn.dubby.itbus.constant.CookieConstant;
 import cn.dubby.itbus.dao.UserDao;
+import cn.dubby.itbus.mapper.EmailMapper;
 import cn.dubby.itbus.service.dto.RegisterDto;
 import cn.dubby.itbus.util.CacheUtils;
 import cn.dubby.itbus.util.CookieUtils;
@@ -12,12 +13,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
-import org.springframework.util.StringUtils;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.Random;
 import java.util.UUID;
 
 /**
@@ -34,12 +33,18 @@ public class UserService {
     @Autowired
     private RedisTemplate<String, String> template;
 
+    @Autowired
+    private EmailService emailService;
+
+    @Autowired
+    private EmailMapper emailMapper;
+
     public User login(String email, String password, HttpServletResponse httpServletResponse, HttpServletRequest httpServletRequest) {
         User user = userDao.selectByEmail(email);
 
         if (user != null && user.getPassword().equals(password)) {
             Cookie cookie = new Cookie(CookieConstant.LOGIN_EMAIL, user.getEmail());
-            cookie.setMaxAge(60 * 60 * 24 * 10);
+            cookie.setMaxAge(-1);
             cookie.setPath("/");
             cookie.setHttpOnly(false);
             httpServletResponse.addCookie(cookie);
@@ -74,6 +79,8 @@ public class UserService {
         if (row <= 0) {
             return RegisterDto.DB_ERROR;
         }
+
+        emailService.sendRegisterThanksEmail(email);
 
         return new RegisterDto(1, registerUser.getId());
     }

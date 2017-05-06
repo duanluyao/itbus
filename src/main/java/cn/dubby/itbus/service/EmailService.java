@@ -1,5 +1,11 @@
 package cn.dubby.itbus.service;
 
+import cn.dubby.itbus.bean.EmailWithBLOBs;
+import cn.dubby.itbus.constant.EmailTemplate;
+import cn.dubby.itbus.mapper.EmailMapper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
@@ -19,6 +25,8 @@ import java.util.Properties;
 @Service
 public class EmailService {
 
+    private final Logger logger = LoggerFactory.getLogger(EmailService.class);
+
     @Resource(name = "username4Email")
     private String username4Email;
 
@@ -34,7 +42,9 @@ public class EmailService {
     @Resource(name = "mailSmtpPort")
     private String mailSmtpPort;
 
-    @Async(value = "emailTaskExecutor")
+    @Autowired
+    private EmailMapper emailMapper;
+
     public void sendEmail(String recipient, String subject, String content) throws UnsupportedEncodingException, MessagingException {
         // 1. 创建一封邮件
         Properties props = new Properties();                // 用于连接邮件服务器的参数配置（发送邮件时才需要用到）
@@ -72,4 +82,39 @@ public class EmailService {
         transport.close();
     }
 
+    @Async(value = "emailTaskExecutor")
+    public void sendWriteThanksEmail(String recipient, int busId, String ticket) {
+        EmailWithBLOBs email = new EmailWithBLOBs();
+        email.setRecipient(recipient);
+        email.setSubject(EmailTemplate.THANKS_WRITE_EMAIL_SUBJECT);
+        email.setContent(String.format(EmailTemplate.THANKS_WRITE_EMAIL_CONTENT, busId, ticket));
+        email.setStatus(1);
+
+        try {
+            sendEmail(email.getRecipient(), email.getSubject(), email.getContent());
+            sendEmail(EmailTemplate.NOTICE_MASTER_RECIPIENT, EmailTemplate.NOTICE_MASTER_SUBJECT, "新增文章:" + busId);
+        } catch (Exception e) {
+            logger.error("send email error", e);
+            email.setStatus(-1);
+        }
+        emailMapper.insertSelective(email);
+    }
+
+    @Async(value = "emailTaskExecutor")
+    public void sendRegisterThanksEmail(String recipient) {
+        EmailWithBLOBs email = new EmailWithBLOBs();
+        email.setRecipient(recipient);
+        email.setSubject(EmailTemplate.THANKS_REGISTER_EMAIL_SUBJECT);
+        email.setContent(String.format(EmailTemplate.THANKS_REGISTER_EMAIL_CONTENT, recipient));
+        email.setStatus(1);
+
+        try {
+            sendEmail(email.getRecipient(), email.getSubject(), email.getContent());
+            sendEmail(EmailTemplate.NOTICE_MASTER_RECIPIENT, EmailTemplate.NOTICE_MASTER_SUBJECT, "注册用户:" + recipient);
+        } catch (Exception e) {
+            logger.error("send email error", e);
+            email.setStatus(-1);
+        }
+        emailMapper.insertSelective(email);
+    }
 }

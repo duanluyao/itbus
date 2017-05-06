@@ -58,4 +58,9 @@ public class UserController {
         return ResponseEntity.badRequest().body("注册失败");
     }
 
+    @RequestMapping(value = "resetpassword")
+    public Object resetPassword(String email, String password, String randomCode, HttpServletResponse httpServletResponse) {
+
+        return ResponseEntity.badRequest().body("修改失败");
+    }
 }

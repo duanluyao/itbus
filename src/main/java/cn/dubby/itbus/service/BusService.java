@@ -1,8 +1,6 @@
 package cn.dubby.itbus.service;
 
 import cn.dubby.itbus.bean.Bus;
-import cn.dubby.itbus.bean.EmailWithBLOBs;
-import cn.dubby.itbus.constant.EmailTemplate;
 import cn.dubby.itbus.dao.BusDao;
 import cn.dubby.itbus.mapper.EmailMapper;
 import cn.dubby.itbus.service.dto.CountDto;
@@ -13,8 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
-import javax.mail.MessagingException;
-import java.io.UnsupportedEncodingException;
 import java.util.*;
 
 /**
@@ -121,7 +117,7 @@ public class BusService {
             bus = busDao.selectByPrimaryKey(bus.getId());
 
             if (!StringUtils.isEmpty(email)) {
-                saveThanksEmail(email, bus.getId(), bus.getBusTicket());
+                emailService.sendWriteThanksEmail(email, bus.getId(), bus.getBusTicket());
             }
 
         } catch (Exception e) {
@@ -130,23 +126,6 @@ public class BusService {
         }
 
         return new ModifyResult<>(bus);
-    }
-
-    private void saveThanksEmail(String recipient, int busId, String ticket) {
-        EmailWithBLOBs email = new EmailWithBLOBs();
-        email.setRecipient(recipient);
-        email.setSubject(EmailTemplate.THANKS_WRITE_EMAIL_SUBJECT);
-        email.setContent(String.format(EmailTemplate.THANKS_WRITE_EMAIL_CONTENT, busId, ticket));
-        email.setStatus(1);
-
-        emailMapper.insertSelective(email);
-
-        try {
-            emailService.sendEmail(email.getRecipient(), email.getSubject(), email.getContent());
-            emailService.sendEmail(EmailTemplate.NOTICE_MASTER_RECIPIENT, EmailTemplate.NOTICE_MASTER_SUBJECT, "新增文章:" + busId);
-        } catch (Exception e) {
-            logger.error("send email error", e);
-        }
     }
 
     public ModifyResult<Bus> update(int busId, String ticket, int busLineId, String busName, String busContent) {

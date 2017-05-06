@@ -32,6 +32,12 @@ function checkLoginFromCookie() {
         $("#nickname").removeClass("hidden");
         $("#nickname").text(email);
         $("#loginBtn").addClass("hidden");
+        $("#userinfo").removeClass("hidden");
+    } else {
+        $("#nickname").addClass("hidden");
+        $("#nickname").text(email);
+        $("#loginBtn").removeClass("hidden");
+        $("#userinfo").removeClass("hidden");
     }
 }
 
