@@ -22,3 +22,29 @@ function login() {
         }
     });
 }
+
+function resetPassword() {
+    var email = $("#inputEmail").val();
+
+    if(email == undefined || email == null) {
+        alert("请填写邮箱");
+        return;
+    }
+
+    $.ajax({
+        type: 'post',
+        url: "user/resetpassword",
+        data: {
+            email: email
+        },
+        cache: false,
+        dataType: 'json',
+        success: function (data) {
+            alert("请查看邮件");
+        },
+        error: function (data) {
+            alert(data.responseText);
+            return;
+        }
+    });
+}

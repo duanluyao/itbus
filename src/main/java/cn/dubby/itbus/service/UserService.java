@@ -5,9 +5,11 @@ import cn.dubby.itbus.constant.CookieConstant;
 import cn.dubby.itbus.dao.UserDao;
 import cn.dubby.itbus.mapper.EmailMapper;
 import cn.dubby.itbus.service.dto.RegisterDto;
+import cn.dubby.itbus.service.dto.ResetPasswordDto;
 import cn.dubby.itbus.util.CacheUtils;
 import cn.dubby.itbus.util.CookieUtils;
 import com.alibaba.fastjson.JSON;
+import org.apache.commons.lang3.RandomStringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -58,6 +60,18 @@ public class UserService {
         return null;
     }
 
+    public void logout(HttpServletResponse httpServletResponse, HttpServletRequest httpServletRequest) {
+        Cookie cookie = new Cookie(CookieConstant.LOGIN_EMAIL, "");
+        cookie.setMaxAge(0);
+        cookie.setPath("/");
+        cookie.setHttpOnly(false);
+        httpServletResponse.addCookie(cookie);
+
+        String visitId = CookieUtils.getCookie(httpServletRequest, CookieConstant.VISIT_ID);
+
+        template.opsForHash().put(CacheUtils.LOGIN_USER_COLLECTION, visitId, CacheUtils.UN_LOGIN_USER);
+    }
+
     public RegisterDto register(String email, String password, String invitationCode) {
         User user = userDao.selectByEmail(email);
         if (user != null) {
@@ -74,7 +88,7 @@ public class UserService {
         registerUser.setLoginName(email);
         registerUser.setPassword(password);
 
-        registerUser.setInvitationCode(UUID.randomUUID().toString());
+        registerUser.setInvitationCode(RandomStringUtils.randomAlphanumeric(6));
 
         int row = userDao.insertSelective(registerUser);
         if (row <= 0) {
@@ -84,6 +98,26 @@ public class UserService {
         emailService.sendRegisterThanksEmail(email);
 
         return new RegisterDto(1, registerUser.getId());
+    }
+
+    public ResetPasswordDto resetPassword(String email) {
+        User user = userDao.selectByEmail(email);
+        if (user == null) {
+            return ResetPasswordDto.EMAIL_NOT_EXIST;
+        }
+
+        String password = RandomStringUtils.randomAlphanumeric(8);
+        user.setPassword(password);
+
+        int row = userDao.updateByPrimaryKeySelective(user);
+
+        if (row <= 0) {
+            return ResetPasswordDto.DB_ERROR;
+        }
+
+        emailService.sendResetPasswordEmail(email, password);
+
+        return new ResetPasswordDto(1, user.getId());
     }
 
     public boolean checkInvitationCode(String code) {

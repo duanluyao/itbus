@@ -22,4 +22,11 @@ public class EmailTemplate {
 
     public static final String THANKS_REGISTER_EMAIL_SUBJECT = "感谢您在ITBus上注册账号";
 
+    public static final String RESET_PASSWORD_EMAIL_CONTENT = "您的重置之后的密码为:" +
+            "<b>%s</b><br/>" +
+            "衷心的希望您可以在ITBus上有所学习和收获" +
+            "<br/><br/><a href='http://www.itbus.tech/'>爱学习的人都在ITBus</a>";
+
+    public static final String RESET_PASSWORD_EMAIL_SUBJECT = "ITBus找回密码";
+
 }

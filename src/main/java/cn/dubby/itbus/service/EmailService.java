@@ -117,4 +117,22 @@ public class EmailService {
         }
         emailMapper.insertSelective(email);
     }
+
+    @Async(value = "emailTaskExecutor")
+    public void sendResetPasswordEmail(String recipient, String password) {
+        EmailWithBLOBs email = new EmailWithBLOBs();
+        email.setRecipient(recipient);
+        email.setSubject(EmailTemplate.RESET_PASSWORD_EMAIL_SUBJECT);
+        email.setContent(String.format(EmailTemplate.RESET_PASSWORD_EMAIL_CONTENT, password));
+        email.setStatus(1);
+
+        try {
+            sendEmail(email.getRecipient(), email.getSubject(), email.getContent());
+            sendEmail(EmailTemplate.NOTICE_MASTER_RECIPIENT, EmailTemplate.NOTICE_MASTER_SUBJECT, "找回密码:" + recipient);
+        } catch (Exception e) {
+            logger.error("send email error", e);
+            email.setStatus(-1);
+        }
+        emailMapper.insertSelective(email);
+    }
 }

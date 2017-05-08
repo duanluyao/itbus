@@ -41,6 +41,24 @@ function checkLoginFromCookie() {
     }
 }
 
+function logout() {
+    $.ajax({
+        type: 'post',
+        url: "user/logout",
+        cache: false,
+        success: function (data) {
+            window.location.href = "index.html";
+            commonRefresh();
+        },
+        error: function (XMLHttpRequest, textStatus, errorThrown) {
+            console.log("logout error");
+            console.log(textStatus);
+            console.log(errorThrown);
+            commonRefresh();
+        }
+    });
+}
+
 function commonRefresh() {
     checkLoginFromCookie();
 }

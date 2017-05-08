@@ -4,11 +4,13 @@ import cn.dubby.itbus.bean.User;
 import cn.dubby.itbus.constant.CookieConstant;
 import cn.dubby.itbus.service.UserService;
 import cn.dubby.itbus.service.dto.RegisterDto;
+import cn.dubby.itbus.service.dto.ResetPasswordDto;
 import cn.dubby.itbus.service.dto.UserDto;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -45,6 +47,10 @@ public class UserController {
 
     @RequestMapping(value = "register", method = RequestMethod.POST)
     public Object register(String email, String password, String invitationCode, HttpServletResponse httpServletResponse) {
+        if (StringUtils.isEmpty(invitationCode)) {
+            return ResponseEntity.badRequest().body("邀请码不能为空");
+        }
+
         RegisterDto register = userService.register(email, password, invitationCode);
 
         switch (register.getErrorCode()) {
@@ -58,9 +64,22 @@ public class UserController {
         return ResponseEntity.badRequest().body("注册失败");
     }
 
-    @RequestMapping(value = "resetpassword")
-    public Object resetPassword(String email, String password, String randomCode, HttpServletResponse httpServletResponse) {
+    @RequestMapping(value = "logout", method = RequestMethod.POST)
+    public Object logout(HttpServletResponse httpServletResponse, HttpServletRequest httpServletRequest) {
+        userService.logout(httpServletResponse, httpServletRequest);
+        return ResponseEntity.ok().body("退出登录");
+    }
 
-        return ResponseEntity.badRequest().body("修改失败");
+    @RequestMapping(value = "resetpassword")
+    public Object resetPassword(String email) {
+        ResetPasswordDto resetPasswordDto = userService.resetPassword(email);
+
+        switch (resetPasswordDto.getErrorCode()) {
+            case 1:
+                return ResponseEntity.ok().body(resetPasswordDto);
+            case -1:
+                return ResponseEntity.badRequest().body("没有账号");
+        }
+        return ResponseEntity.ok().body("重置失败");
     }
 }
