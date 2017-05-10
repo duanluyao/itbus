@@ -33,11 +33,13 @@ function checkLoginFromCookie() {
         $("#nickname").text(email);
         $("#loginBtn").addClass("hidden");
         $("#userinfo").removeClass("hidden");
+        return true;
     } else {
         $("#nickname").addClass("hidden");
         $("#nickname").text(email);
         $("#loginBtn").removeClass("hidden");
         $("#userinfo").removeClass("hidden");
+        return false;
     }
 }
 
