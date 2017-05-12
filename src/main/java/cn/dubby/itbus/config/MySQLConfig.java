@@ -37,9 +37,11 @@ public class MySQLConfig {
         DruidDataSource druidDataSource = new DruidDataSource();
 
         // 从 redis 中取出这两个配置
+        String dbUrl = template.opsForValue().get("spring.datasource.url");
         String dbUserName = template.opsForValue().get("spring.datasource.username");
         String dbPassword = template.opsForValue().get("spring.datasource.password");
 
+        druidDataSource.setUrl(dbUrl);
         druidDataSource.setUsername(dbUserName);
         druidDataSource.setPassword(dbPassword);
 
