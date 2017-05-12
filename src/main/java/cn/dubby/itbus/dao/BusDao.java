@@ -23,7 +23,7 @@ public class BusDao {
     @Autowired
     private BusMapper busMapper;
 
-    @SingleCache(cacheKey = "'busTop:'.concat(#limit)", timeout = 5, unit = TimeUnit.MINUTES)
+    @SingleCache(cacheKey = "'busTop:'.concat(#limit)", timeout = 1, unit = TimeUnit.HOURS)
     public List<Bus> selectTopN(int limit) {
         return busMapper.selectTopN(limit);
     }
@@ -50,11 +50,19 @@ public class BusDao {
         return busMapper.countByLine(lineId);
     }
 
-    public void up(int busId) {
+    @CacheEvict(cacheKey = "'bus:id:'.concat(#busId)")
+    public void up(Integer busId) {
+        if (busId == null)
+            return;
 
+        busMapper.up(busId);
     }
 
-    public void down(int busId) {
+    @CacheEvict(cacheKey = "'bus:id:'.concat(#busId)")
+    public void down(Integer busId) {
+        if (busId == null)
+            return;
 
+        busMapper.down(busId);
     }
 }

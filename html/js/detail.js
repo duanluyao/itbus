@@ -46,6 +46,57 @@ function freshDetail(busId) {
 
 var editor;
 
+function up() {
+    var busId = getUrlParam('id');
+    if (busId != undefined || busId != null) {
+        $.ajax({
+            type: 'post',
+            url: "bus/up",
+            data: {
+                busId: busId
+            },
+            cache: false,
+            success: function (data) {
+                alert("点赞成功");
+            },
+            error: function () {
+                console.log("error");
+                return;
+            }
+        });
+    }
+
+    disableUpDown();
+}
+
+function down() {
+    var busId = getUrlParam('id');
+    if (busId != undefined || busId != null) {
+        $.ajax({
+            type: 'post',
+            url: "bus/down",
+            data: {
+                busId: busId
+            },
+            cache: false,
+            success: function (data) {
+                alert("鄙视成功");
+            },
+            error: function () {
+                console.log("error");
+                return;
+            }
+        });
+    }
+
+    disableUpDown();
+}
+
+function disableUpDown() {
+    $("#upOrDownBtn").addClass("hidden");
+    $("btnHr").addClass("hidden");
+}
+
 function refresh() {
     var busId = getUrlParam('id');
     if (busId == undefined || busId == null)

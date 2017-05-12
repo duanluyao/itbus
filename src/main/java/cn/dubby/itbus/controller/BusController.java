@@ -91,13 +91,13 @@ public class BusController {
     @RequestMapping(value = "up", method = RequestMethod.POST)
     public Object up(Integer busId) {
         busService.up(busId);
-        return ResponseEntity.ok();
+        return ResponseEntity.ok().body(null);
     }
 
     @RequestMapping(value = "down", method = RequestMethod.POST)
     public Object down(Integer busId) {
         busService.down(busId);
-        return ResponseEntity.ok();
+        return ResponseEntity.ok().body(null);
     }
 
 }

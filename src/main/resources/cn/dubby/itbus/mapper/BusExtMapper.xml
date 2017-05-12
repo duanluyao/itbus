@@ -1,32 +1,40 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="cn.dubby.itbus.mapper.BusMapper" >
+<mapper namespace="cn.dubby.itbus.mapper.BusMapper">
 
-  <select id="selectTopN" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-    select 
-    <include refid="Base_Column_List" />
-    from bus
-    ORDER BY up_count DESC
-    limit #{limit,jdbcType=INTEGER}
-  </select>
+    <select id="selectTopN" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from bus
+        ORDER BY up_count DESC
+        limit #{limit,jdbcType=INTEGER}
+    </select>
 
-  <select id="selectByLine" resultMap="BaseResultMap">
-    select
-    <include refid="Base_Column_List" />
-    from bus
-    WHERE bus_line_id = #{lineId,jdbcType=INTEGER}
-    AND status = 1
-    ORDER BY up_count DESC
-    limit #{offset}, #{limit}
-  </select>
+    <select id="selectByLine" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from bus
+        WHERE bus_line_id = #{lineId,jdbcType=INTEGER}
+        AND status = 1
+        ORDER BY up_count DESC
+        limit #{offset}, #{limit}
+    </select>
 
-  <select id="countByLine" resultType="int">
-    select
-    count(1)
-    from bus
-    WHERE bus_line_id = #{lineId,jdbcType=INTEGER}
-    AND status = 1
-    ORDER BY up_count DESC
-  </select>
+    <select id="countByLine" resultType="int">
+        select
+        count(1)
+        from bus
+        WHERE bus_line_id = #{lineId,jdbcType=INTEGER}
+        AND status = 1
+        ORDER BY up_count DESC
+    </select>
+
+    <update id="up" parameterType="java.lang.Integer">
+      UPDATE bus SET up_count = up_count + 1 WHERE id = #{id};
+    </update>
+
+    <update id="down" parameterType="java.lang.Integer">
+        UPDATE bus SET down_count = down_count + 1 WHERE id = #{id};
+    </update>
 
 </mapper>
