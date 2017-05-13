@@ -46,7 +46,7 @@ function freshTopBusList() {
                     + "</h4> <p>" + date.toLocaleDateString()
                     + " &nbsp;&nbsp; 赞:"
                     + item.upCount + " &nbsp;&nbsp; 踩:"
-                    + item.downCount + " </p> <p><a target=\"_blank\" class=\"btn btn-default\" href=\"/detail.html?id="
+                    + item.downCount + " </p> <p><a class=\"btn btn-default\" href=\"/detail.html?id="
                     + item.id
                     + "\" role=\"button\">阅读文章</a></p> </div>");
             });
