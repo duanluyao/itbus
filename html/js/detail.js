@@ -44,7 +44,7 @@ function freshDetail(busId) {
     });
 }
 
-var editor;
+// var editor;
 
 function up() {
     var busId = getUrlParam('id');
@@ -97,11 +97,78 @@ function disableUpDown() {
     $("btnHr").addClass("hidden");
 }
 
+function freshCommentList() {
+    $("#commentText").val("");
+
+    var busId = getUrlParam('id');
+    if (busId == undefined || busId == null)
+        return;
+
+    $.ajax({
+        type: 'get',
+        url: "comment/list",
+        data: {
+            busId: busId
+        },
+        cache: false,
+        dataType: 'json',
+        success: function (data) {
+            $("#commentList").html("");
+
+            jQuery.each(data, function (i, item) {
+                var date = new Date();
+                date.setTime(item.createTime);
+
+                $("#commentList").append("<div><p>"
+                    + date.toLocaleDateString()
+                    + "</p><p>"
+                    + item.content
+                    + "</p> <hr> </div>");
+            });
+        },
+        error: function () {
+            return;
+        }
+    });
+}
+
+function comment() {
+    var busId = getUrlParam('id');
+    if (busId == undefined || busId == null)
+        return;
+
+    var content = $("#commentText").val();
+    if (content == undefined || content == null) {
+        alert("评论内容不能为空");
+        return;
+    }
+
+    $.ajax({
+        type: 'post',
+        url: "comment/add",
+        data: {
+            busId: busId,
+            content: content
+        },
+        cache: false,
+        dataType: 'json',
+        success: function (data) {
+            console.log(JSON.stringify(data));
+            freshCommentList();
+        },
+        error: function () {
+            console.log("error");
+            freshCommentList();
+        }
+    });
+}
+
 function refresh() {
     var busId = getUrlParam('id');
     if (busId == undefined || busId == null)
         busId = 1;
     freshDetail(busId);
+    freshCommentList();
 }
 
 refresh();

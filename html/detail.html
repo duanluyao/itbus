@@ -47,7 +47,8 @@
             <ul class="nav navbar-nav navbar-right">
                 <li><a id="loginBtn" href="login.html">登录/注册</a></li>
                 <li class="dropdown hidden" id="userinfo">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" id="nickname"><span class="caret"></span></a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                       aria-expanded="false" id="nickname"><span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li><a href="#">个人信息</a></li>
                         <li><a href="#">写作中心</a></li>
@@ -85,10 +86,16 @@
         </div>
     </div>
 
-    <hr id="btnHr">
+    <div class="col-md-12 col-sm-12 col-xs-12 col-lg-12">
+        <hr>
+    </div>
+
 
     <div class="col-md-12 col-sm-12 col-xs-12 col-lg-12" id="upOrDownBtn">
         <div class="row">
+            <div class="col-md-2 col-sm-3 col-xs-4 col-lg-1">
+                <h5>你的感受:</h5>
+            </div>
             <div class="col-md-2 col-sm-3 col-xs-4 col-lg-1">
                 <p><a class="btn btn-default" href="javascript:void(0)" role="button" onclick="up()">我要赞</a></p>
             </div>
@@ -98,17 +105,48 @@
         </div>
     </div>
 
-    <hr>
+    <div class="col-md-12 col-sm-12 col-xs-12 col-lg-12">
+        <hr>
+    </div>
 
-    <footer class="text-center">
-        <p>
-            <script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");
-            document.write(unescape("%3Cspan id='cnzz_stat_icon_1261755694'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s95.cnzz.com/z_stat.php%3Fid%3D1261755694%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
-            | 2017-2017, ITBus.tech, All Rights Reserved | <a href="mailto:yang_zheng1994@163.com">意见反馈</a></p>
-    </footer>
+    <div class="col-md-12 col-sm-12 col-xs-12 col-lg-12">
+        <div>
+            <h5>评论列表:</h5>
+        </div>
+        <br>
+        <div class="col-md-12 col-sm-12 col-xs-12 col-lg-12" id="commentList">
+
+            <!--<div>-->
+                <!--<p>2017-2-3:</p>-->
+                <!--<p>Hello</p>-->
+                <!--<hr>-->
+            <!--</div>-->
+
+        </div>
+
+    </div>
+
+    <div class="col-md-12 col-sm-12 col-xs-12 col-lg-12">
+        <form>
+            <div class="form-group">
+                <label for="commentText" class="control-label">填写评价：</label>
+                <textarea class="form-control" id="commentText"></textarea>
+            </div>
+        </form>
+        <a href="javascript:void(0)" class="btn btn-default" role="button" onclick="comment()">发表评论</a>
+    </div>
+</div>
+
+<hr>
+
+<footer class="text-center">
+    <p>
+        <script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+        document.write(unescape("%3Cspan id='cnzz_stat_icon_1261755694'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s95.cnzz.com/z_stat.php%3Fid%3D1261755694%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+        | 2017-2017, ITBus.tech, All Rights Reserved | <a href="mailto:yang_zheng1994@163.com">意见反馈</a></p>
+</footer>
 
 </div><!--/.container-->
-
 
 
 <!-- Placed at the end of the document so the pages load faster -->
@@ -139,7 +177,7 @@
 <script src="js/detail.js"></script>
 
 <script>
-    (function(){
+    (function () {
         var bp = document.createElement('script');
         var curProtocol = window.location.protocol.split(':')[0];
         if (curProtocol === 'https') {
