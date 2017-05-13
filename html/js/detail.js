@@ -57,7 +57,7 @@ function up() {
             },
             cache: false,
             success: function (data) {
-                alert("点赞成功");
+                // alert("点赞成功");
             },
             error: function () {
                 console.log("error");
@@ -80,7 +80,7 @@ function down() {
             },
             cache: false,
             success: function (data) {
-                alert("鄙视成功");
+                // alert("鄙视成功");
             },
             error: function () {
                 console.log("error");
