@@ -13,7 +13,6 @@ function freshTopBusLineList() {
         dataType: 'json',
         success: function (data) {
             jQuery.each(data, function (i, item) {
-                console.log(JSON.stringify(item));
                 if (i == 0) {
                     // $("#topBusLineList").append("<a href=\"#\" class=\"list-group-item active\">" + item.lineName + "</a>");
                     $("#topBusLineList").append("<a href='javascript:void(0)' onclick=\"javascirpt:freshBusListByLineId(" + item.id + ", 1)\" class=\"list-group-item\">" + item.lineName + "</a>");
@@ -40,7 +39,7 @@ function freshTopBusList() {
         success: function (data) {
             jQuery.each(data, function (i, item) {
                 var date = new Date();
-                date.setTime(item.updateTime);
+                date.setTime(item.createTime);
                 $("#busList").append("<div class=\"col-md-12 col-sm-12 col-xs-12 col-lg-6\"> <h4>"
                     + item.busName
                     + "</h4> <p>" + date.toLocaleDateString()

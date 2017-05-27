@@ -11,7 +11,7 @@ function freshDetail(busId) {
         dataType: 'json',
         success: function (data) {
             var date = new Date();
-            date.setTime(data.updateTime);
+            date.setTime(data.createTime);
             $("#title").text(data.busName);
             $("#busName").text(data.busName);
 
@@ -153,7 +153,6 @@ function comment() {
         cache: false,
         dataType: 'json',
         success: function (data) {
-            console.log(JSON.stringify(data));
             freshCommentList();
         },
         error: function () {

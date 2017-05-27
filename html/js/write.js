@@ -33,7 +33,6 @@ function save(busLineId, busName, busContent, email) {
         cache: false,
         dataType: 'json',
         success: function (data) {
-            console.log(JSON.stringify(data));
             $("#id").text(data.id);
             $("#ticket").text(data.busTicket);
             $('#myModal').modal('show');
