@@ -6,7 +6,7 @@
         select
         <include refid="Base_Column_List"/>
         from bus
-        ORDER BY up_count DESC
+        ORDER BY create_time DESC
         limit #{limit,jdbcType=INTEGER}
     </select>
 
@@ -16,7 +16,7 @@
         from bus
         WHERE bus_line_id = #{lineId,jdbcType=INTEGER}
         AND status = 1
-        ORDER BY up_count DESC
+        ORDER BY create_time DESC
         limit #{offset}, #{limit}
     </select>
 
