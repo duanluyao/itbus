@@ -48,6 +48,9 @@ function save(busLineId, busName, busContent, email) {
 function refresh() {
     freshBusLineList();
 
+    var email = getCookie("LOGIN_EMAIL");
+    $("#email").val(email);
+
     $("#closeBtn").click(function () {
         $('#myModal').modal('hide');
         window.location.href = "detail.html?id=" + $("#id").text();
