@@ -15,9 +15,11 @@ function freshTopBusLineList() {
             jQuery.each(data, function (i, item) {
                 if (i == 0) {
                     // $("#topBusLineList").append("<a href=\"#\" class=\"list-group-item active\">" + item.lineName + "</a>");
-                    $("#topBusLineList").append("<a href='javascript:void(0)' onclick=\"javascirpt:freshBusListByLineId(" + item.id + ", 1)\" class=\"list-group-item\">" + item.lineName + "</a>");
+                    $("#topBusLineList").append("<a href='index.html?id=" + item.id + "'" + "class=\"list-group-item\">" + item.lineName + "</a>");
+                    // $("#topBusLineList").append("<a href='javascript:void(0)' onclick=\"javascirpt:freshBusListByLineId(" + item.id + ", 1)\" class=\"list-group-item\">" + item.lineName + "</a>");
                 } else {
-                    $("#topBusLineList").append("<a href='javascript:void(0)' onclick=\"javascirpt:freshBusListByLineId(" + item.id + ", 1)\" class=\"list-group-item\">" + item.lineName + "</a>");
+                    $("#topBusLineList").append("<a href='index.html?id=" + item.id + "'" + "class=\"list-group-item\">" + item.lineName + "</a>");
+                    // $("#topBusLineList").append("<a href='javascript:void(0)' onclick=\"javascirpt:freshBusListByLineId(" + item.id + ", 1)\" class=\"list-group-item\">" + item.lineName + "</a>");
                 }
             });
         },
