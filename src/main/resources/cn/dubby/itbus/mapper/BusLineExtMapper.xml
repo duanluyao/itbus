@@ -3,10 +3,12 @@
 <mapper namespace="cn.dubby.itbus.mapper.BusLineMapper" >
 
   <select id="selectTopN" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-    select 
-    <include refid="Base_Column_List" />
-    from bus_line
-    where status = 1
+    select DISTINCT
+    bl.id as id, bl.line_name as line_name, bl.create_time as create_time, bl.update_time as update_time, bl.status as status
+    from bus_line bl join bus on bl.id = bus.bus_line_id
+    where bl.status = 1
+    group by bl.id
+    order by max(up_count) desc
     limit #{id,jdbcType=INTEGER}
   </select>
 

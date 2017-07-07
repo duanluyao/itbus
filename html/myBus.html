@@ -9,18 +9,19 @@
 
     <meta name="description" content="">
     <meta name="author" content="">
+
+    <!-- 百度原创 -->
+    <meta name="baidu-site-verification" content="niZ3jGZiSZ"/>
+
     <link rel="icon" href="favicon.ico">
 
-    <title>ITBus</title>
+    <title>每一个爱学习的人都在ITBus</title>
 
     <!-- Bootstrap core CSS -->
     <link href="lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
     <link href="css/offcanvas.css" rel="stylesheet">
-
-    <!-- markdown css -->
-    <link rel="stylesheet" href="lib/editormd/css/editormd.min.css"/>
 
 </head>
 
@@ -30,7 +31,7 @@
         <div class="navbar-header">
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
                     aria-expanded="false" aria-controls="navbar">
-                <!--<span class="sr-only">Toggle navigation</span>-->
+                <span class="sr-only">Toggle navigation</span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
@@ -39,10 +40,10 @@
         </div>
         <div id="navbar" class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
-                <li><a href="index.html">首页</a></li>
+                <li class="active"><a href="#">首页</a></li>
                 <li><a href="station.html">全部分类</a></li>
                 <li><a href="home.html">反馈意见</a></li>
-                <li><a href="#" id="saveBtn" style="color: #00d95a">保存</a></li>
+
             </ul>
 
             <ul class="nav navbar-nav navbar-right">
@@ -61,60 +62,43 @@
                 </li>
             </ul>
 
-        </div><!-- /.nav-collapse -->
-    </div><!-- /.container -->
-</nav><!-- /.navbar -->
+        </div>
+
+    </div>
+</nav>
 
 <div class="container">
 
-    <div class="row row-offcanvas row-offcanvas-right" style="width: 100%;">
+    <div class="row row-offcanvas row-offcanvas-right">
 
-        <form>
+        <div class="col-xs-12 col-sm-12">
+            <p class="pull-right visible-xs">
+                <button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas">分类</button>
+            </p>
 
-            <div class="form-group">
-                <input type="text" class="form-control"  id="busName" placeholder="标题">
+            <!--<div class="jumbotron">-->
+                <!--<h3>美团点评内推啦！</h3>-->
+                <!--<p>本人所在的美团点评由于业务扩张，所以现在诚邀请各位大神来共同进步发展。美团点评旗下的美团，大众点评，猫眼电影等都可以内推，地点包括上海，北京。邮件请发送至<a  href="mailto:yangzheng03@meituan.com">yangzheng03@meituan.com</a>。如果岗位咨询也可以发邮件咨询，希望能和各位共事~</p>-->
+            <!--</div>-->
+
+            <div id="busList" class="row">
             </div>
 
-            <div class="form-group">
-                <input type="email" class="form-control"  id="email" placeholder="邮箱">
-            </div>
 
-            <div class="form-group" style="width: 100%" id="busLines">
-            </div>
-
-        </form>
-    </div><!--/row-->
-
-    <div class="row row-offcanvas row-offcanvas-right"  style="width: 100%; height: 640px;">
-        <div id="editormd">
-            <textarea style="display:none;">[TOC]</textarea>
         </div>
+
     </div>
 
     <hr>
 
     <footer class="text-center">
-        <p><script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1261755694'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s95.cnzz.com/z_stat.php%3Fid%3D1261755694%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script> | 2017-2017, ITBus.tech, All Rights Reserved | <a href="mailto:yang_zheng1994@163.com">意见反馈</a></p>
+        <p>
+            <script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+            document.write(unescape("%3Cspan id='cnzz_stat_icon_1261755694'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s95.cnzz.com/z_stat.php%3Fid%3D1261755694%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+            | 2017-2017, ITBus.tech, All Rights Reserved | <a href="mailto:yang_zheng1994@163.com">意见反馈</a></p>
     </footer>
 
-    <div class="modal fade" id="myModal" tabindex="-1" role="dialog">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title">这是修改此文章的唯一凭证，请妥善保存</h4>
-                </div>
-                <div class="modal-body">
-                    编号：<p id="id"></p>
-                    凭证：<p id="ticket"></p>
-                </div>
-                <div class="modal-footer">
-                    <button id="closeBtn" type="button" class="btn btn-default" >我记住了</button>
-                </div>
-            </div><!-- /.modal-content -->
-        </div><!-- /.modal-dialog -->
-    </div><!-- /.modal -->
-
-</div><!--/.container-->
+</div>
 
 
 
@@ -127,30 +111,10 @@
 
 <script src="js/offcanvas.js"></script>
 
-<script src="js/write.js"></script>
-
-<script src="lib/editormd/editormd.min.js"></script>
-<script type="text/javascript">
-    $(function () {
-        var editor = editormd("editormd", {
-            path: "lib/editormd/lib/",// Autoload modules mode, codemirror, marked... dependents libs path
-            imageUpload: true,
-            imageFormats: ["jpg", "jpeg", "gif", "png", "bmp", "webp"],
-            imageUploadURL: "file/upload",
-        });
-
-        /*
-         // or
-         var editor = editormd({
-         id   : "editormd",
-         path : "../lib/"
-         });
-         */
-    });
-</script>
+<script src="js/myBus.js"></script>
 
 <script>
-    (function(){
+    (function () {
         var bp = document.createElement('script');
         var curProtocol = window.location.protocol.split(':')[0];
         if (curProtocol === 'https') {

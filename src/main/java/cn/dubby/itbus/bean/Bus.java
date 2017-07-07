@@ -23,6 +23,16 @@ public class Bus {
 
     private String busContent;
 
+    private Integer authorId;
+
+    public Integer getAuthorId() {
+        return authorId;
+    }
+
+    public void setAuthorId(Integer authorId) {
+        this.authorId = authorId;
+    }
+
     public Integer getId() {
         return id;
     }

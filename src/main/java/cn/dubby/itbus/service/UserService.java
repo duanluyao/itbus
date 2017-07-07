@@ -129,4 +129,13 @@ public class UserService {
         return false;
     }
 
+    public boolean modifyPassword(String password, int userId) {
+        User user = userDao.selectByPrimaryKey(userId);
+        if (user != null) {
+            return userDao.modifyPassword(password, userId);
+        } else {
+            return false;
+        }
+    }
+
 }

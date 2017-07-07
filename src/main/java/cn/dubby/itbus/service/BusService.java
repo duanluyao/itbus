@@ -50,6 +50,10 @@ public class BusService {
         return busDao.selectByLine(lineId, offset, PAGE_SIZE);
     }
 
+    public List<Bus> mine(int userId) {
+        return busDao.selectByUserId(userId);
+    }
+
     public CountDto countByLine(int lineId, int pageId) {
         if (pageId <= 1) {
             pageId = 1;
@@ -128,6 +132,34 @@ public class BusService {
         return new ModifyResult<>(bus);
     }
 
+    public ModifyResult<Bus> save(int busLineId, String busName, String busContent, String email, int userId) {
+        if (busLineId < 0 || StringUtils.isEmpty(busContent) || StringUtils.isEmpty(busName)) {
+            return ModifyResult.PARAMS_ERROR;
+        }
+
+        Bus bus = new Bus();
+        bus.setBusContent(busContent);
+        bus.setBusName(busName);
+        bus.setBusLineId(busLineId);
+        bus.setBusTicket(UUID.randomUUID().toString() + "-" + UUID.randomUUID().toString());
+        bus.setAuthorId(userId);
+
+        try {
+            busDao.insertSelective(bus);
+            bus = busDao.selectByPrimaryKey(bus.getId());
+
+            if (!StringUtils.isEmpty(email)) {
+                emailService.sendWriteThanksEmail(email, bus.getId(), bus.getBusTicket());
+            }
+
+        } catch (Exception e) {
+            logger.error("save", e);
+            return ModifyResult.SYSTEM_EXCEPTION;
+        }
+
+        return new ModifyResult<>(bus);
+    }
+
     public ModifyResult<Bus> update(int busId, String ticket, int busLineId, String busName, String busContent) {
         if (busId < 0 || StringUtils.isEmpty(ticket) || busLineId < 0 || StringUtils.isEmpty(busContent) || StringUtils.isEmpty(busName)) {
             return ModifyResult.PARAMS_ERROR;
@@ -142,6 +174,35 @@ public class BusService {
         if (!ticket.equals(bus.getBusTicket())) {
             logger.error("ticket error,id:" + busId + ",ticket:" + ticket);
             return ModifyResult.TICKET_ERROR;
+        }
+
+        bus.setCreateTime(null);
+        bus.setUpdateTime(null);
+        bus.setBusContent(busContent);
+        bus.setBusName(busName);
+        bus.setBusLineId(busLineId);
+
+        try {
+            busDao.updateByPrimaryKeySelective(bus);
+
+            bus = busDao.selectByPrimaryKey(busId);
+        } catch (Exception e) {
+            logger.error("save", e);
+            return ModifyResult.SYSTEM_EXCEPTION;
+        }
+
+        return new ModifyResult<>(bus);
+    }
+
+    public ModifyResult<Bus> modify(int busId, int busLineId, String busName, String busContent) {
+        if (busId < 0 || busLineId < 0 || StringUtils.isEmpty(busContent) || StringUtils.isEmpty(busName)) {
+            return ModifyResult.PARAMS_ERROR;
+        }
+
+        Bus bus = busDao.selectByPrimaryKey(busId);
+        if (bus == null) {
+            logger.error("update not exist,id:" + busId);
+            return save(busLineId, busName, busContent, null);
         }
 
         bus.setCreateTime(null);

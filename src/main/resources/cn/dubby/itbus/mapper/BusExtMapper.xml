@@ -20,6 +20,15 @@
         limit #{offset}, #{limit}
     </select>
 
+    <select id="selectByUserId" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from bus
+        WHERE author_id = #{userId,jdbcType=INTEGER}
+        AND status = 1
+        ORDER BY create_time DESC
+    </select>
+
     <select id="countByLine" resultType="int">
         select
         count(1)

@@ -42,4 +42,8 @@ public class UserDao {
     public User selectByInvitationCode(String code) {
         return userMapper.selectByInvitationCode(code);
     }
+
+    public boolean modifyPassword(String password, int userId) {
+        return userMapper.modifyPassword(password, userId) == 1;
+    }
 }

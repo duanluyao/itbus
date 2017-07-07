@@ -32,6 +32,10 @@ public class BusDao {
         return busMapper.selectByLine(lineId, offset, limit);
     }
 
+    public List<Bus> selectByUserId(int userId) {
+        return busMapper.selectByUserId(userId);
+    }
+
     @SingleCache(cacheKey = "'bus:id:'.concat(#id)")
     public Bus selectByPrimaryKey(Integer id) {
         return busMapper.selectByPrimaryKey(id);

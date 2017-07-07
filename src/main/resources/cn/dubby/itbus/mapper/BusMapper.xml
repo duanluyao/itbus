@@ -11,13 +11,13 @@
     <result column="up_count" property="upCount" jdbcType="BIGINT" />
     <result column="down_count" property="downCount" jdbcType="BIGINT" />
     <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="author_id" property="authorId" jdbcType="INTEGER" />
   </resultMap>
   <resultMap id="ResultMapWithBLOBs" type="cn.dubby.itbus.bean.Bus" extends="BaseResultMap" >
     <result column="bus_content" property="busContent" jdbcType="LONGVARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
-    id, bus_line_id, bus_name, create_time, update_time, bus_ticket, up_count, down_count, 
-    status
+    id, bus_line_id, bus_name, create_time, update_time, bus_ticket, up_count, down_count, status, author_id
   </sql>
   <sql id="Blob_Column_List" >
     bus_content
@@ -38,11 +38,11 @@
     insert into bus (id, bus_line_id, bus_name, 
       create_time, update_time, bus_ticket, 
       up_count, down_count, status, 
-      bus_content)
+      bus_content, author_id)
     values (#{id,jdbcType=INTEGER}, #{busLineId,jdbcType=INTEGER}, #{busName,jdbcType=VARCHAR}, 
       #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{busTicket,jdbcType=VARCHAR}, 
       #{upCount,jdbcType=BIGINT}, #{downCount,jdbcType=BIGINT}, #{status,jdbcType=INTEGER}, 
-      #{busContent,jdbcType=LONGVARCHAR})
+      #{busContent,jdbcType=LONGVARCHAR}, #{authorId,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="cn.dubby.itbus.bean.Bus"  useGeneratedKeys="true" keyProperty="id">
     insert into bus
@@ -77,6 +77,9 @@
       <if test="busContent != null" >
         bus_content,
       </if>
+      <if test="busContent != null" >
+        author_id,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -108,6 +111,9 @@
       </if>
       <if test="busContent != null" >
         #{busContent,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="authorId != null" >
+        #{authorId,jdbcType=INTEGER},
       </if>
     </trim>
   </insert>

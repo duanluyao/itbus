@@ -2,6 +2,7 @@ package cn.dubby.itbus.controller;
 
 import cn.dubby.itbus.bean.User;
 import cn.dubby.itbus.constant.CookieConstant;
+import cn.dubby.itbus.constant.HttpRequestConstant;
 import cn.dubby.itbus.service.UserService;
 import cn.dubby.itbus.service.dto.RegisterDto;
 import cn.dubby.itbus.service.dto.ResetPasswordDto;
@@ -81,5 +82,22 @@ public class UserController {
                 return ResponseEntity.badRequest().body("没有账号");
         }
         return ResponseEntity.ok().body("重置失败");
+    }
+
+    @RequestMapping(value = "modify/password")
+    public Object modifyPassword(String password, HttpServletResponse httpServletResponse, HttpServletRequest httpServletRequest) {
+        Object user = httpServletRequest.getAttribute(HttpRequestConstant.LOGIN_USER);
+        if (user == null) {
+            // 未登录
+            return ResponseEntity.ok().body("请先登录！");
+        } else {
+            // 登录
+            User loginUser  = (User) user;
+            boolean success = userService.modifyPassword(password, loginUser.getId());
+            if (success) {
+                return ResponseEntity.ok().body("修改成功！");
+            }
+        }
+        return ResponseEntity.badRequest().body("修改失败");
     }
 }

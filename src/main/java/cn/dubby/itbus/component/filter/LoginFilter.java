@@ -86,7 +86,7 @@ public class LoginFilter implements Filter {
             httpServletResponse.addCookie(cookie);
             return true;
         }
-        return true;
+        return false;
     }
 
 

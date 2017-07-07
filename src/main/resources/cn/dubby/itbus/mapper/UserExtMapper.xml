@@ -16,4 +16,9 @@
     where invitation_code = #{code}
   </select>
 
+  <update id="modifyPassword">
+    UPDATE user SET password = #{password}
+    WHERE id = #{userId}
+  </update>
+
 </mapper>

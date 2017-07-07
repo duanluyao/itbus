@@ -1,6 +1,7 @@
 package cn.dubby.itbus.mapper;
 
 import cn.dubby.itbus.bean.User;
+import org.apache.ibatis.annotations.Param;
 
 public interface UserMapper {
     int deleteByPrimaryKey(Integer id);
@@ -18,4 +19,6 @@ public interface UserMapper {
     User selectByEmail(String email);
 
     User selectByInvitationCode(String code);
+
+    int modifyPassword(@Param("password") String password, @Param("userId") int userId);
 }

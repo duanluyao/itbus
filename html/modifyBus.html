@@ -67,7 +67,7 @@
 
 <div class="container">
 
-    <div class="row row-offcanvas row-offcanvas-right" style="width: 100%;">
+    <div class="row row-offcanvas row-offcanvas-right"  style="width: 100%;">
 
         <form>
 
@@ -75,11 +75,8 @@
                 <input type="text" class="form-control"  id="busName" placeholder="标题">
             </div>
 
-            <div class="form-group">
-                <input type="email" class="form-control"  id="email" placeholder="邮箱">
-            </div>
-
             <div class="form-group" style="width: 100%" id="busLines">
+
             </div>
 
         </form>
@@ -101,7 +98,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title">这是修改此文章的唯一凭证，请妥善保存</h4>
+                    <h4 class="modal-title">这是修改此文章的凭证，请妥善保存</h4>
                 </div>
                 <div class="modal-body">
                     编号：<p id="id"></p>
@@ -127,16 +124,16 @@
 
 <script src="js/offcanvas.js"></script>
 
-<script src="js/write.js"></script>
+<script src="js/modifyBus.js"></script>
 
 <script src="lib/editormd/editormd.min.js"></script>
 <script type="text/javascript">
     $(function () {
         var editor = editormd("editormd", {
             path: "lib/editormd/lib/",// Autoload modules mode, codemirror, marked... dependents libs path
-            imageUpload: true,
+            imageUpload: false,
             imageFormats: ["jpg", "jpeg", "gif", "png", "bmp", "webp"],
-            imageUploadURL: "file/upload",
+            imageUploadURL: "./php/upload.php",
         });
 
         /*
@@ -148,6 +145,7 @@
          */
     });
 </script>
+
 
 <script>
     (function(){

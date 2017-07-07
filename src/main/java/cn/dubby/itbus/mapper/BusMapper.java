@@ -24,6 +24,8 @@ public interface BusMapper {
 
     List<Bus> selectByLine(@Param("lineId") int lineId, @Param("offset") int offset, @Param("limit") int limit);
 
+    List<Bus> selectByUserId(@Param("userId") int userId);
+
     int countByLine(@Param("lineId") int lineId);
 
     int up(int id);
