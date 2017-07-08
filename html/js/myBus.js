@@ -20,12 +20,12 @@ function freshMyBusList() {
                     + "</h4> " + date.toLocaleDateString()
                     + " &nbsp;&nbsp; 赞:"
                     + item.upCount + " &nbsp;&nbsp; 踩:"
-                    + item.downCount + " &nbsp;&nbsp;  <a class=\"btn btn-default\" href=\"/detail.html?id="
+                    + item.downCount + "<br/> <a class=\"btn btn-default\" href=\"/detail.html?id="
                     + item.id
                     + "\" role=\"button\">阅读文章</a>"
                     + " &nbsp;&nbsp;<a class=\"btn btn-default\" href=\"/modifyBus.html?id="
                     + item.id
-                    + "\" role=\"button\">修改文章</a> </div><br/>");
+                    + "\" role=\"button\">修改文章</a> </div><br/><br/>");
             });
         },
         error: function () {
