@@ -19,14 +19,14 @@ public class EmailServiceTest extends BaseTest {
 
     @Ignore
     public void test() {
-        try {
-            // 我自己的QQ邮箱
-            emailService.sendEmail("1778520607@qq.com", "测试", "测试内容");
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-        } catch (MessagingException e) {
-            e.printStackTrace();
-        }
+//        try {
+//            // 我自己的QQ邮箱
+//            emailService.sendEmail("1778520607@qq.com", "测试", "测试内容");
+//        } catch (UnsupportedEncodingException e) {
+//            e.printStackTrace();
+//        } catch (MessagingException e) {
+//            e.printStackTrace();
+//        }
     }
 
 }

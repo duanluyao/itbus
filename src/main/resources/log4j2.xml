@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--设置log4j2的自身log级别为warn-->
-<configuration status="WARN">
+<configuration status="INFO">
 
     <appenders>
         <console name="Console" target="SYSTEM_OUT">
@@ -43,6 +43,15 @@
             </Policies>
         </RollingFile>
 
+        <RollingFile name="CSRFRollingFile" fileName="/dubby/itbus/csrf.log"
+                     filePattern="/dubby/itbus/csrf-%d{yyyy-MM-dd}-%i.log">
+            <PatternLayout pattern="[%d{HH:mm:ss:SSS}] [%p] - %l - %m%n"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy/>
+                <SizeBasedTriggeringPolicy size="100 MB"/>
+            </Policies>
+        </RollingFile>
+
     </appenders>
 
     <loggers>
@@ -57,6 +66,11 @@
             <appender-ref ref="RollingFileWarn"/>
             <appender-ref ref="RollingFileError"/>
         </root>
+
+        <logger name="csrf" level="INFO">
+            <appender-ref ref="Console"/>
+            <appender-ref ref="CSRFRollingFile"/>
+        </logger>
     </loggers>
 
 </configuration>

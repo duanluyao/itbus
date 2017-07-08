@@ -16,10 +16,10 @@ public class BusTest extends BaseTest {
 
     @Ignore
     public void create() {
-        for (int i = 0; i < 100000; ++i) {
-            busService.save(16, "Test-new" + i, "Content-new" + i, "yang_zheng1994@163.com");
-            System.out.println(i);
-        }
+//        for (int i = 0; i < 100000; ++i) {
+//            busService.save(16, "Test-new" + i, "Content-new" + i, "yang_zheng1994@163.com");
+//            System.out.println(i);
+//        }
     }
 
 }
