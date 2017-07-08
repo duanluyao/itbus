@@ -24,7 +24,6 @@ import java.util.UUID;
 @WebFilter(
         urlPatterns = "/*"
 )
-
 public class LoginFilter implements Filter {
 
     private RedisTemplate<String, String> template;
