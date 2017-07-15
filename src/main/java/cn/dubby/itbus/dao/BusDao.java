@@ -32,6 +32,14 @@ public class BusDao {
         return busMapper.selectByLine(lineId, offset, limit);
     }
 
+    public Bus selectNext(int lineId, int busId) {
+        return busMapper.selectNext(lineId, busId);
+    }
+
+    public Bus selectPrev(int lineId, int busId) {
+        return busMapper.selectPrev(lineId, busId);
+    }
+
     public List<Bus> selectByUserId(int userId) {
         return busMapper.selectByUserId(userId);
     }

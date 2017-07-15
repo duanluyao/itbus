@@ -20,6 +20,28 @@
         limit #{offset}, #{limit}
     </select>
 
+    <select id="selectNext" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from bus
+        WHERE bus_line_id = #{lineId,jdbcType=INTEGER}
+        AND status = 1
+        AND id > #{busId,jdbcType=INTEGER}
+        ORDER BY create_time ASC
+        limit 1
+    </select>
+
+    <select id="selectPrev" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from bus
+        WHERE bus_line_id = #{lineId,jdbcType=INTEGER}
+        AND status = 1
+        AND id &lt; #{busId,jdbcType=INTEGER}
+        ORDER BY create_time DESC
+        limit 1
+    </select>
+
     <select id="selectByUserId" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>

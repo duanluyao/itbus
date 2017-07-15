@@ -162,12 +162,67 @@ function comment() {
     });
 }
 
+function freshNext() {
+
+    var busId = getUrlParam('id');
+    if (busId == undefined || busId == null)
+        return;
+
+    $.ajax({
+        type: 'get',
+        url: "bus/next",
+        data: {
+            id: busId
+        },
+        cache: false,
+        dataType: 'json',
+        success: function (data) {
+            if (data.id != undefined && data.id != null) {
+                $('#nextBus').attr('href', '/detail.html?id=' + data.id);
+                $("#nextBus").text('下一章：' + data.busName);
+            }
+        },
+        error: function () {
+            return;
+        }
+    });
+}
+
+function freshPrev() {
+
+    var busId = getUrlParam('id');
+    if (busId == undefined || busId == null)
+        return;
+
+    $.ajax({
+        type: 'get',
+        url: "bus/prev",
+        data: {
+            id: busId
+        },
+        cache: false,
+        dataType: 'json',
+        success: function (data) {
+            if (data.id != undefined && data.id != null) {
+                $('#prevBus').attr('href', '/detail.html?id=' + data.id);
+                $("#prevBus").text('上一章：' + data.busName);
+            }
+        },
+        error: function () {
+            return;
+        }
+    });
+}
+
 function refresh() {
     var busId = getUrlParam('id');
     if (busId == undefined || busId == null)
         busId = 1;
     freshDetail(busId);
     freshCommentList();
+
+    freshNext();
+    freshPrev();
 }
 
 refresh();

@@ -147,4 +147,22 @@ public class BusController {
         return ResponseEntity.ok().body(null);
     }
 
+    @RequestMapping(value = "next")
+    public Object next(int id) {
+        Bus bus = null;
+
+        bus = busService.next(id);
+
+        return ResponseEntity.ok(bus);
+    }
+
+    @RequestMapping(value = "prev")
+    public Object prev(int id) {
+        Bus bus = null;
+
+        bus = busService.prev(id);
+
+        return ResponseEntity.ok(bus);
+    }
+
 }

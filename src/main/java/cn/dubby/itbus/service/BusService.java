@@ -105,6 +105,34 @@ public class BusService {
         return bus;
     }
 
+    public Bus next(int busId) {
+        Bus currentBus = busDao.selectByPrimaryKey(busId);
+
+        Bus nextBus = busDao.selectNext(currentBus.getBusLineId(), currentBus.getId());
+
+        if (nextBus == null) {
+            logger.error("detail not exist,id:" + busId);
+            return null;
+        }
+
+        nextBus.setBusTicket(null);
+        return nextBus;
+    }
+
+    public Bus prev(int busId) {
+        Bus currentBus = busDao.selectByPrimaryKey(busId);
+
+        Bus prevBus = busDao.selectPrev(currentBus.getBusLineId(), currentBus.getId());
+
+        if (prevBus == null) {
+            logger.error("detail not exist,id:" + busId);
+            return null;
+        }
+
+        prevBus.setBusTicket(null);
+        return prevBus;
+    }
+
     public ModifyResult<Bus> save(int busLineId, String busName, String busContent, String email) {
         if (busLineId < 0 || StringUtils.isEmpty(busContent) || StringUtils.isEmpty(busName)) {
             return ModifyResult.PARAMS_ERROR;
