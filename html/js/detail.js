@@ -121,9 +121,9 @@ function freshCommentList() {
 
                 $("#commentList").append("<div><p>"
                     + date.toLocaleDateString()
-                    + "</p><xmp>"
+                    + "</p><div>"
                     + item.content
-                    + "</xmp> <hr> </div>");
+                    + "</div> <hr> </div>");
             });
         },
         error: function () {
