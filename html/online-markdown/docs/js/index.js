@@ -15379,11 +15379,11 @@ var OnlineMarkdown = {
   currentState: 'edit',
   init: function() {
     var self = this;
-    // self.load().then(function() {
-    //   self.start()
-    // }).fail(function(){
-    //   self.start();
-    // });
+    self.load().then(function() {
+      self.start()
+    }).fail(function(){
+      self.start();
+    });
   },
   start: function() {
     this.bindEvt();
@@ -15393,17 +15393,17 @@ var OnlineMarkdown = {
     new Clipboard('.btn');
   },
   load: function() {
-    // return $.ajax({
-    //   type: 'GET',
-    //   url: params.path || './demo.md',
-    //   dateType: 'text',
-    //   data: {
-    //     _t: new Date() * 1
-    //   },
-    //   timeout: 2000
-    // }).then(function(data) {
-    //   $('#input').val(data);
-    // });
+    return $.ajax({
+      type: 'GET',
+      url: params.path || './demo.md',
+      dateType: 'text',
+      data: {
+        _t: new Date() * 1
+      },
+      timeout: 2000
+    }).then(function(data) {
+      $('#input').val(data);
+    });
   },
   bindEvt: function() {
     var self = this;
