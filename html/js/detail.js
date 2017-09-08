@@ -214,6 +214,31 @@ function freshPrev() {
     });
 }
 
+function share() {
+    $.ajax({
+        type: 'get',
+        url: "file/qrcode",
+        data: {
+            content: document.URL
+        },
+        cache: false,
+        dataType: 'json',
+        success: function (data) {
+            if (data.url != undefined && data.url != null) {
+                $("#detailQRCode").attr("src", data.url);
+                $('#myModal').modal('show');
+            }
+        },
+        error: function () {
+            return;
+        }
+    });
+}
+
+function focusITBus() {
+    $('#weixinModal').modal('show');
+}
+
 function refresh() {
     var busId = getUrlParam('id');
     if (busId == undefined || busId == null)

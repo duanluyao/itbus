@@ -41,13 +41,14 @@
             <ul class="nav navbar-nav">
                 <li><a href="index.html">首页</a></li>
                 <li><a href="station.html">全部分类</a></li>
-                <li><a href="home.html">反馈意见</a></li>
+                <li><a href="home.html">工具及反馈</a></li>
             </ul>
 
             <ul class="nav navbar-nav navbar-right">
                 <li><a id="loginBtn" href="login.html">登录/注册</a></li>
                 <li class="dropdown hidden" id="userinfo">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" id="nickname"><span class="caret"></span></a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                       aria-expanded="false" id="nickname"><span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <!--<li><a href="#">个人信息</a></li>-->
                         <!--<li><a href="#">写作中心</a></li>-->
@@ -80,7 +81,6 @@
             <span>踩:</span>
             <span id="downCount"></span>
         </div>
-
     </div>
     <hr>
 
@@ -102,21 +102,33 @@
         </div>
     </div>
 
-    <div class="col-md-12 col-sm-12 col-xs-12 col-lg-12">
-        <hr>
-    </div>
-
-
     <div class="col-md-12 col-sm-12 col-xs-12 col-lg-12" id="upOrDownBtn">
+        <hr>
         <div class="row">
             <div class="col-md-2 col-sm-3 col-xs-4 col-lg-1">
                 <h5>你的感受:</h5>
             </div>
-            <div class="col-md-2 col-sm-3 col-xs-4 col-lg-1">
-                <p><a class="btn btn-default" href="javascript:void(0)" role="button" onclick="up()">对我有用</a></p>
+            <div class="col-md-2 col-sm-3 col-xs-4 col-lg-2">
+                <p><a class="btn btn-default" href="javascript:void(0)" role="button" onclick="up()">对我有点用</a></p>
             </div>
-            <div class="col-md-2 col-sm-3 col-xs-4 col-lg-1">
+            <div class="col-md-2 col-sm-3 col-xs-4 col-lg-2">
                 <p><a class="btn btn-default" href="javascript:void(0)" role="button" onclick="down()">没任何收获</a></p>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="col-md-12 col-sm-12 col-xs-12 col-lg-12">
+        <hr>
+        <div class="row">
+            <div class="col-md-2 col-sm-3 col-xs-4 col-lg-1">
+                <h5>我要分享:</h5>
+            </div>
+            <div class="col-md-2 col-sm-3 col-xs-4 col-lg-2">
+                <p><a class="btn btn-default" href="javascript:void(0)" role="button" onclick="share()">分享给朋友</a></p>
+            </div>
+            <div class="col-md-2 col-sm-3 col-xs-4 col-lg-2">
+                <p><a class="btn btn-default" href="javascript:void(0)" role="button" onclick="focusITBus()">关注微信订阅号</a></p>
             </div>
         </div>
     </div>
@@ -133,9 +145,9 @@
         <div class="col-md-12 col-sm-12 col-xs-12 col-lg-12" id="commentList">
 
             <!--<div>-->
-                <!--<p>2017-2-3:</p>-->
-                <!--<p>Hello</p>-->
-                <!--<hr>-->
+            <!--<p>2017-2-3:</p>-->
+            <!--<p>Hello</p>-->
+            <!--<hr>-->
             <!--</div>-->
 
         </div>
@@ -155,10 +167,44 @@
 
 <hr>
 
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header text-center">
+                <h2 class="modal-title">微信扫描二维码分享本文</h2>
+            </div>
+            <div class="modal-body text-center">
+                <img id="detailQRCode" src="" alt="">
+            </div>
+            <div class="modal-footer">
+                <!--<button id="closeBtn" type="button" class="btn btn-default" >关闭</button>-->
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<div class="modal fade" id="weixinModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header text-center">
+                <h2 class="modal-title">关注微信订阅号ITBusTech</h2>
+            </div>
+            <div class="modal-body text-center">
+                <img src="http://www.dubby.cn//upload/1504774761775ITBus.jpg" alt="ITBusTech">
+            </div>
+            <div class="modal-footer">
+                <!--<button id="closeBtn" type="button" class="btn btn-default" >关闭</button>-->
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
 <footer class="text-center">
     <p>
-        <script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1264118107'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s13.cnzz.com/z_stat.php%3Fid%3D1264118107%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
-        | 2017-2017, Dubby.cn, All Rights Reserved | <a href="mailto:yang_zheng1994@163.com">意见反馈</a></p>
+        <script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+        document.write(unescape("%3Cspan id='cnzz_stat_icon_1264118107'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s13.cnzz.com/z_stat.php%3Fid%3D1264118107%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+        | 2017-2017, Dubby.cn, All Rights Reserved
+    </p>
 </footer>
 
 </div><!--/.container-->
