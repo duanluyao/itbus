@@ -22,4 +22,4 @@
 + 微信公众号：ITBusTech
 
 
-![](http://www.dubby.cn//upload/1504774761775ITBus.jpg)
+![](http://www.dubby.cn/upload/1504774761775ITBus.jpg)
