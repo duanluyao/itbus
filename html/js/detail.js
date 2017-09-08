@@ -239,6 +239,10 @@ function focusITBus() {
     $('#weixinModal').modal('show');
 }
 
+function rewardWeixin() {
+    $('#rewardWeixinModal').modal('show');
+}
+
 function refresh() {
     var busId = getUrlParam('id');
     if (busId == undefined || busId == null)
