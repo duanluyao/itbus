@@ -19,6 +19,7 @@
 # 联系作者
 
 + 邮箱：[yang_zheng1994@163.com](mailto://yang_zheng1994@163.com)
-+ 微信公众号ITBusTech
++ 微信公众号：ITBusTech
+
 
 ![](http://www.dubby.cn//upload/1504774761775ITBus.jpg)
