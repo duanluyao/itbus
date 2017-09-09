@@ -243,6 +243,10 @@ function rewardWeixin() {
     $('#rewardWeixinModal').modal('show');
 }
 
+function rewardZhifubao() {
+    $('#rewardZhifubaoModal').modal('show');
+}
+
 function refresh() {
     var busId = getUrlParam('id');
     if (busId == undefined || busId == null)
