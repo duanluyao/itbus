@@ -50,7 +50,9 @@ public class BusDao {
     }
 
     public int insertSelective(Bus record) {
-        return busMapper.insertSelective(record);
+        int result = busMapper.insertSelective(record);
+        clearBusLineList();
+        return result;
     }
 
     @CacheEvict(cacheKey = "'bus:id:'.concat(#record.id)")
@@ -68,6 +70,7 @@ public class BusDao {
             return;
 
         busMapper.up(busId);
+        clearBusLineList();
     }
 
     @CacheEvict(cacheKey = "'bus:id:'.concat(#busId)")
@@ -76,5 +79,11 @@ public class BusDao {
             return;
 
         busMapper.down(busId);
+        clearBusLineList();
+    }
+
+    private void clearBusLineList() {
+        template.delete("busLineTop:1000");
+        template.delete("busLineTop:20");
     }
 }
