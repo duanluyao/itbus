@@ -235,6 +235,10 @@ function share() {
     });
 }
 
+function closeWeixinModal() {
+    $('#weixinModal').modal('hide');
+}
+
 function focusITBus() {
     $('#weixinModal').modal('show');
 }

@@ -201,17 +201,20 @@
     </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
 
-<div class="modal fade" id="weixinModal" tabindex="-1" role="dialog">
+<div class="modal fade" id="weixinModal" tabindex="-1" role="dialog" onclick="closeWeixinModal()">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header text-center">
-                <h2 class="modal-title">关注微信订阅号ITBusTech</h2>
+                <h3 class="modal-title">关注微信订阅号ITBusTech</h3>
             </div>
             <div class="modal-body text-center">
+                <div>
+                    点击关闭此弹框，阅读正文
+                </div>
                 <img width="60%"  src="http://www.dubby.cn/upload/1504774761775ITBus.jpg" alt="ITBusTech">
             </div>
             <div class="modal-footer">
-                <!--<button id="closeBtn" type="button" class="btn btn-default" >关闭</button>-->
+                <button id="closeBtn" data-dismiss="modal" type="button" class="btn btn-default" >关闭</button>
             </div>
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
@@ -301,6 +304,7 @@
         s.parentNode.insertBefore(bp, s);
 
         focusITBus();
+
     })();
 </script>
 
